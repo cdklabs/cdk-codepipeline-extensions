@@ -41,7 +41,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   constructsVersion: '10.1.149',
 });
 const addFiles = project.addTask('add-files-to-lib', {
-  exec: 'mv src/time-windows/calendar/calendar.ics lib/time-windows/calendar/calendar.ics',
+  exec: 'mv cdk-codepipeline-extensions/cdk-codepipeline-extensions/src/time-windows/calendar/calendar.ics cdk-codepipeline-extensions/cdk-codepipeline-extensions/lib/time-windows/calendar/calendar.ics',
 });
 project.tasks.tryFind('post-compile').spawn(addFiles);
 
