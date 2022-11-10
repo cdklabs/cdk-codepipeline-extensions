@@ -1,6 +1,6 @@
-## My Project
+## CDK CodePipeline Extensions
 
-TODO: Fill this README out!
+This project is for use in the workshop DOP 401: Get better at building AWS CDK constructs.
 
 Be sure to:
 
