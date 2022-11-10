@@ -8,7 +8,7 @@ import { Schedule } from 'aws-cdk-lib/aws-events';
 import { Calendar } from '../../../src/time-windows/calendar/calendar';
 import { ChangeController } from '../../../src/time-windows/change-controller/change-controller';
 
-jest.mock('../src/time-windows/calendar/calendar');
+jest.mock('../../../src/time-windows/calendar/calendar');
 const mockPath = jest.fn().mockReturnValue({ calendarArn: 'test-calendar' });
 Calendar.path = mockPath;
 
