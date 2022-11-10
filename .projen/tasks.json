@@ -4,7 +4,7 @@
       "name": "add-files-to-lib",
       "steps": [
         {
-          "exec": "mv cdk-codepipeline-extensions/cdk-codepipeline-extensions/src/time-windows/calendar/calendar.ics cdk-codepipeline-extensions/cdk-codepipeline-extensions/lib/time-windows/calendar/calendar.ics"
+          "exec": "mv /Volumes/workplace/cdk-codepipeline-extensions/src/time-windows/calendar/calendar.ics /Volumes/workplace/cdk-codepipeline-extensions/lib/time-windows/calendar/calendar.ics"
         }
       ]
     },
