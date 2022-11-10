@@ -4,7 +4,7 @@
       "name": "add-files-to-lib",
       "steps": [
         {
-          "exec": "mv ~$(pwd)/src/time-windows/calendar/calendar.ics ~$(pwd)/lib/time-windows/calendar/calendar.ics"
+          "exec": "mv $(pwd)/src/time-windows/calendar/calendar.ics $(pwd)/lib/time-windows/calendar/calendar.ics"
         }
       ]
     },
