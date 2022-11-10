@@ -1,4 +1,3 @@
-const path = require('path');
 const { awscdk } = require('projen');
 const { Stability } = require('projen/lib/cdk');
 const project = new awscdk.AwsCdkConstructLibrary({
@@ -42,9 +41,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   constructsVersion: '10.1.149',
 });
 
+const calendarPath = 'time-windows/calendar/calendar.ics';
+
 const addFiles = project.addTask('add-files-to-lib', {
-  exec: `mv ${path.join(__dirname, 'src', 'time-windows/calendar/calendar.ics')} ${path.join(__dirname, 'lib', 'time-windows/calendar/calendar.ics')}`,
+  exec: `mv $(pwd)/src/${calendarPath} $(pwd)/lib/${calendarPath}`,
 });
 project.tasks.tryFind('post-compile').spawn(addFiles);
-
 project.synth();
