@@ -5,7 +5,6 @@
     "url": "https://github.com/cdklabs/cdk-codepipeline-extensions.git"
   },
   "scripts": {
-    "add-files-to-lib": "npx projen add-files-to-lib",
     "build": "npx projen build",
     "bump": "npx projen bump",
     "bundle": "npx projen bundle",
@@ -31,6 +30,7 @@
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
+    "process-calendar": "npx projen process-calendar",
     "release": "npx projen release",
     "test": "npx projen test",
     "test:watch": "npx projen test:watch",

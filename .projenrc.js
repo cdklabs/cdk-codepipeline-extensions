@@ -40,11 +40,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   constructsVersion: '10.1.149',
 });
-
-const calendarPath = 'time-windows/calendar/calendar.ics';
-
-const addFiles = project.addTask('add-files-to-lib', {
-  exec: `mv $(pwd)/src/${calendarPath} $(pwd)/lib/${calendarPath}`,
+project.addTask('process-calendar', {
+  exec: 'cd src/time-windows/calendar/ && ruby process-calendar.rb',
 });
-project.tasks.tryFind('post-compile').spawn(addFiles);
 project.synth();
