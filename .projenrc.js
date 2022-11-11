@@ -13,9 +13,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     secret: 'GITHUB_TOKEN',
   },
   stability: Stability.EXPERIMENTAL,
-  // publishToGo: {
-  //   moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions',
-  // },
+  npmAccess: 'public',
+  publishToGo: {
+    moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions',
+  },
   publishToMaven: {
     javaPackage: 'io.github.cdklabs.cdk.codepipeline.extensions',
     mavenGroupId: 'io.github.cdklabs',
@@ -32,15 +33,36 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   docgen: true,
   deps: [],
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
+  description:
+    'This project is for use in the workshop DOP 401: Get better at building AWS CDK constructs.',
   devDeps: [],
-  bundledDeps: [
-    '@types/aws-lambda',
-    'aws-sdk',
-  ],
+  bundledDeps: ['@types/aws-lambda', 'aws-sdk'],
   constructsVersion: '10.1.149',
+  eslintOptions: {
+    prettier: true,
+  },
 });
+
 project.addTask('process-calendar', {
   exec: 'cd src/time-windows/calendar/ && ruby process-calendar.rb',
 });
+
+project.package.addField('prettier', {
+  singleQuote: true,
+  semi: true,
+  trailingComma: 'es5',
+});
+
+project.eslint.addRules({
+  'prettier/prettier': [
+    'error',
+    { singleQuote: true, semi: true, trailingComma: 'es5' },
+  ],
+});
+
+project.eslint.addOverride({
+  files: ['*-function.ts'],
+  rules: { 'prettier/prettier': 'off' },
+});
+
 project.synth();

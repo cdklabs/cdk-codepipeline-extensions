@@ -2,9 +2,16 @@ import { CodePipeline } from 'aws-sdk';
 
 const codepipeline = new CodePipeline();
 
-export const getStageState = async (pipelineName: string, stageName: string): Promise<CodePipeline.StageState | undefined> => {
-  const pipelineState = await codepipeline.getPipelineState({ name: pipelineName }).promise();
-  return pipelineState.stageStates?.find(stage => stage.stageName === stageName);
+export const getStageState = async (
+  pipelineName: string,
+  stageName: string
+): Promise<CodePipeline.StageState | undefined> => {
+  const pipelineState = await codepipeline
+    .getPipelineState({ name: pipelineName })
+    .promise();
+  return pipelineState.stageStates?.find(
+    (stage) => stage.stageName === stageName
+  );
 };
 
 /**
@@ -14,15 +21,19 @@ export const getStageState = async (pipelineName: string, stageName: string): Pr
 export const disableStageTransition = async (
   params: CodePipeline.Types.DisableStageTransitionInput,
   lastChangedByMustInclude: string,
-  stageState?: CodePipeline.StageState,
+  stageState?: CodePipeline.StageState
 ) => {
   if (
     stageState?.inboundTransitionState?.enabled === true ||
     (stageState?.inboundTransitionState?.enabled === false &&
-      stageState.inboundTransitionState?.lastChangedBy?.includes(lastChangedByMustInclude))
+      stageState.inboundTransitionState?.lastChangedBy?.includes(
+        lastChangedByMustInclude
+      ))
   ) {
     // See documentation https://docs.amazon.com/codepipeline/latest/APIReference/API_DisableStageTransition.html
-    params.reason = params.reason.replace(/[^a-zA-Z0-9!@ \(\)\.\*\?\-]/g, '-').slice(0, 300);
+    params.reason = params.reason
+      .replace(/[^a-zA-Z0-9!@ \(\)\.\*\?\-]/g, '-')
+      .slice(0, 300);
     await codepipeline.disableStageTransition(params).promise();
   }
 };
@@ -34,11 +45,13 @@ export const disableStageTransition = async (
 export const enableStageTransition = async (
   params: CodePipeline.Types.EnableStageTransitionInput,
   lastChangedByMustInclude: string,
-  stageState?: CodePipeline.StageState,
+  stageState?: CodePipeline.StageState
 ) => {
   if (
     stageState?.inboundTransitionState?.enabled === false &&
-    stageState.inboundTransitionState?.lastChangedBy?.includes(lastChangedByMustInclude)
+    stageState.inboundTransitionState?.lastChangedBy?.includes(
+      lastChangedByMustInclude
+    )
   ) {
     await codepipeline.enableStageTransition(params).promise();
   }

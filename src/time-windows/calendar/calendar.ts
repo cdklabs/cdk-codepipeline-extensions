@@ -11,25 +11,29 @@ import { CalendarSetupFunction } from './calendar-setup-function';
 export interface CalendarLocationOptionsBase {
   readonly calendarName: string;
   readonly calendarPath?: string;
-};
+}
 
 export interface S3LocationOptions extends CalendarLocationOptionsBase {
   readonly bucket: IBucket;
   readonly role?: IRole;
-};
+}
 
 export enum CalendarSourceType {
   S3_OBJECT = 's3Object',
   PATH = 'path',
-};
+}
 
 export abstract class Calendar {
   public static path(options: CalendarLocationOptionsBase): Calendar {
-    return new class extends Calendar {
-
+    return new (class extends Calendar {
       public _bind(scope: Construct): Calendar {
-        const localPath = options.calendarPath ? options.calendarPath : __dirname;
-        const calendarBody = fs.readFileSync(path.join(localPath, options.calendarName), { encoding: 'utf-8' });
+        const localPath = options.calendarPath
+          ? options.calendarPath
+          : __dirname;
+        const calendarBody = fs.readFileSync(
+          path.join(localPath, options.calendarName),
+          { encoding: 'utf-8' }
+        );
 
         const calendar = new CustomResourceCalendar(scope, {
           sourceType: CalendarSourceType.PATH,
@@ -42,12 +46,11 @@ export abstract class Calendar {
 
         return calendar;
       }
-    };
+    })();
   }
 
   public static s3Location(options: S3LocationOptions): Calendar {
-    return new class extends Calendar {
-
+    return new (class extends Calendar {
       public _bind(scope: Construct): Calendar {
         const calendar = new CustomResourceCalendar(scope, {
           sourceType: CalendarSourceType.S3_OBJECT,
@@ -61,7 +64,7 @@ export abstract class Calendar {
 
         return calendar;
       }
-    };
+    })();
   }
 
   public calendarName!: string;
@@ -88,17 +91,29 @@ class CustomResourceCalendar extends Calendar {
     super();
 
     this.calendarName = options.calendarName;
-    this.calendarArn = Arn.format({
-      service: 'ssm',
-      resource: 'document',
-      resourceName: options.calendarName,
-    }, Stack.of(scope));
+    this.calendarArn = Arn.format(
+      {
+        service: 'ssm',
+        resource: 'document',
+        resourceName: options.calendarName,
+      },
+      Stack.of(scope)
+    );
 
-    const onEvent: Function = new CalendarSetupFunction(scope, 'OnEventHandler');
-    onEvent.addToRolePolicy(new PolicyStatement({
-      actions: ['ssm:CreateDocument', 'ssm:UpdateDocument', 'ssm:DeleteDocument'],
-      resources: [this.calendarArn],
-    }));
+    const onEvent: Function = new CalendarSetupFunction(
+      scope,
+      'OnEventHandler'
+    );
+    onEvent.addToRolePolicy(
+      new PolicyStatement({
+        actions: [
+          'ssm:CreateDocument',
+          'ssm:UpdateDocument',
+          'ssm:DeleteDocument',
+        ],
+        resources: [this.calendarArn],
+      })
+    );
 
     const provider = new Provider(scope, 'Provider', {
       onEventHandler: onEvent,

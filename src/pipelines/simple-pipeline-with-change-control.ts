@@ -1,7 +1,16 @@
-import { BuildSpec, ComputeType, LinuxBuildImage, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
+import {
+  BuildSpec,
+  ComputeType,
+  LinuxBuildImage,
+  PipelineProject,
+} from 'aws-cdk-lib/aws-codebuild';
 import { IRepository } from 'aws-cdk-lib/aws-codecommit';
 import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
-import { CodeBuildAction, CodeCommitSourceAction, CodeCommitTrigger } from 'aws-cdk-lib/aws-codepipeline-actions';
+import {
+  CodeBuildAction,
+  CodeCommitSourceAction,
+  CodeCommitTrigger,
+} from 'aws-cdk-lib/aws-codepipeline-actions';
 import { Schedule } from 'aws-cdk-lib/aws-events';
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
@@ -18,7 +27,11 @@ export interface PipelineWithChangeControlProps {
 }
 
 export class PipelineWithChangeControl extends Construct {
-  constructor(scope: Construct, id: string, props: PipelineWithChangeControlProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    props: PipelineWithChangeControlProps
+  ) {
     super(scope, id);
 
     const sourceOutput = new Artifact('SourceOutput');
@@ -141,4 +154,4 @@ export class PipelineWithChangeControl extends Construct {
       });
     });
   }
-};
+}

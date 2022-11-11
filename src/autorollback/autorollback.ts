@@ -1,5 +1,11 @@
 import { randomUUID } from 'crypto';
-import { CustomResource, custom_resources, Duration, IResolvable, Names } from 'aws-cdk-lib';
+import {
+  CustomResource,
+  custom_resources,
+  Duration,
+  IResolvable,
+  Names,
+} from 'aws-cdk-lib';
 import { CompositeAlarm, IAlarmRule } from 'aws-cdk-lib/aws-cloudwatch';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Queue } from 'aws-cdk-lib/aws-sqs';
@@ -29,10 +35,13 @@ export class AutoRollback extends Construct {
         actions: ['cloudwatch:DescribeAlarms'],
         resources: ['*'],
         effect: Effect.ALLOW,
-      }),
+      })
     );
 
-    const alarmDescription = `[${props.name ?? ''}-${Names.uniqueResourceName(this, { separator: '-' })}]`;
+    const alarmDescription = `[${props.name ?? ''}-${Names.uniqueResourceName(
+      this,
+      { separator: '-' }
+    )}]`;
 
     new CompositeAlarm(this, 'composite-alarm', {
       compositeAlarmName: props.name,
