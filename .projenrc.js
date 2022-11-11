@@ -43,9 +43,16 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 
-project.addTask('process-calendar', {
+const processCalendarTask = project.addTask('process-calendar', {
   exec: 'cd src/time-windows/calendar/ && ruby process-calendar.rb',
 });
+
+const copyAssetsTask = project.addTask('copy-test-assets', {
+  exec: 'cp test/assets/sample.zip lib/sample.zip',
+});
+
+project.postCompileTask.spawn(processCalendarTask);
+project.postCompileTask.spawn(copyAssetsTask);
 
 project.package.addField('prettier', {
   singleQuote: true,

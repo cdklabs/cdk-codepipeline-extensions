@@ -160,6 +160,14 @@
         }
       ]
     },
+    "copy-test-assets": {
+      "name": "copy-test-assets",
+      "steps": [
+        {
+          "exec": "cp test/assets/sample.zip lib/sample.zip"
+        }
+      ]
+    },
     "default": {
       "name": "default",
       "description": "Synthesize project files",
@@ -280,6 +288,12 @@
       "steps": [
         {
           "spawn": "docgen"
+        },
+        {
+          "spawn": "process-calendar"
+        },
+        {
+          "spawn": "copy-test-assets"
         }
       ]
     },
