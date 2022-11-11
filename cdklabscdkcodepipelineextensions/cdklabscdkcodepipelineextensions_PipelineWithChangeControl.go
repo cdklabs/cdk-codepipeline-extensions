@@ -9,6 +9,7 @@ import (
 	"github.com/cdklabs/cdk-codepipeline-extensions/cdklabscdkcodepipelineextensions/internal"
 )
 
+// A pipeline with a change controller.
 // Experimental.
 type PipelineWithChangeControl interface {
 	constructs.Construct

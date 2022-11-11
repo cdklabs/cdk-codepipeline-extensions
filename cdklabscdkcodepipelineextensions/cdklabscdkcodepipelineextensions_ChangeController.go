@@ -9,6 +9,12 @@ import (
 	"github.com/cdklabs/cdk-codepipeline-extensions/cdklabscdkcodepipelineextensions/internal"
 )
 
+// A change controller.
+//
+// When added to a stage in a pipeline, this will check against
+// a calendar and enable or disable the stage transition based off that calendar,
+// defaulting to closed when the calendar cannot be found or when
+// the check against it fails. It also checks to against alarms.
 // Experimental.
 type ChangeController interface {
 	constructs.Construct

@@ -5,7 +5,7 @@ package cdklabscdkcodepipelineextensions
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func validateCalendar_PathParameters(options *CalendarLocationOptionsBase) error {
+func validateCalendar_PathParameters(options *LocalPathOptions) error {
 	return nil
 }
 

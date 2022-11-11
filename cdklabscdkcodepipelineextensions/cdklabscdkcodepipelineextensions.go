@@ -199,6 +199,10 @@ func init() {
 			return &jsiiProxy_IAlarmDetail{}
 		},
 	)
+	_jsii_.RegisterStruct(
+		"@cdklabs/cdk-codepipeline-extensions.LocalPathOptions",
+		reflect.TypeOf((*LocalPathOptions)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl",
 		reflect.TypeOf((*PipelineWithChangeControl)(nil)).Elem(),

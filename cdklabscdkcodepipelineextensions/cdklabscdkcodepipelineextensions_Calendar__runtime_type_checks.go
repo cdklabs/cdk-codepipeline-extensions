@@ -9,7 +9,7 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 )
 
-func validateCalendar_PathParameters(options *CalendarLocationOptionsBase) error {
+func validateCalendar_PathParameters(options *LocalPathOptions) error {
 	if options == nil {
 		return fmt.Errorf("parameter options is required, but nil was provided")
 	}

@@ -6,6 +6,7 @@ import (
 	_init_ "github.com/cdklabs/cdk-codepipeline-extensions/cdklabscdkcodepipelineextensions/jsii"
 )
 
+// The calendar for determining if pipeline stage should be open or closed.
 // Experimental.
 type Calendar interface {
 	// Experimental.
@@ -78,7 +79,7 @@ func (j *jsiiProxy_Calendar)SetCalendarName(val *string) {
 }
 
 // Experimental.
-func Calendar_Path(options *CalendarLocationOptionsBase) Calendar {
+func Calendar_Path(options *LocalPathOptions) Calendar {
 	_init_.Initialize()
 
 	if err := validateCalendar_PathParameters(options); err != nil {
