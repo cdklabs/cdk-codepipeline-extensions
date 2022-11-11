@@ -3,7 +3,7 @@ const { Stability } = require('projen/lib/cdk');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Kendra Neil',
   authorAddress: 'kneil@amazon.com',
-  cdkVersion: '2.49.0',
+  cdkVersion: '2.50.0',
   defaultReleaseBranch: 'main',
   name: '@cdklabs/cdk-codepipeline-extensions',
   repositoryUrl: 'https://github.com/cdklabs/cdk-codepipeline-extensions.git',
