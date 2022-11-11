@@ -10,7 +10,7 @@ export const handler = async (
 ): Promise<OnEventResponse> => {
   console.log('Event: %j', { ...event, ResponseURL: '...' });
 
-  const calendarPath = event.ResourceProperties.calendarPath;
+  const bucketName = event.ResourceProperties.bucketName;
   const calendarName = event.ResourceProperties.calendarName;
 
   let calendar: string;
@@ -22,7 +22,7 @@ export const handler = async (
     calendar = (
       await s3
         .getObject({
-          Bucket: calendarPath,
+          Bucket: bucketName,
           Key: calendarName,
         })
         .promise()

@@ -33,6 +33,6 @@ text.each_line do |line|
 end
 
 
-File.open("../../../lib/time-windows/calendar/calendar.ics", "w+") do |f|
+File.open("calendar.ics", "w+") do |f|
   calendar.each { |line| f.puts(line) }
 end

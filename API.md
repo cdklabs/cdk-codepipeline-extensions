@@ -1039,6 +1039,13 @@ The timeout configured for this lambda.
 
 ### ChangeController <a name="ChangeController" id="@cdklabs/cdk-codepipeline-extensions.ChangeController"></a>
 
+A change controller.
+
+When added to a stage in a pipeline, this will check against
+a calendar and enable or disable the stage transition based off that calendar,
+defaulting to closed when the calendar cannot be found or when
+the check against it fails. It also checks to against alarms.
+
 #### Initializers <a name="Initializers" id="@cdklabs/cdk-codepipeline-extensions.ChangeController.Initializer"></a>
 
 ```typescript
@@ -2187,6 +2194,8 @@ The timeout configured for this lambda.
 
 ### PipelineWithChangeControl <a name="PipelineWithChangeControl" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl"></a>
 
+A pipeline with a change controller.
+
 #### Initializers <a name="Initializers" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl.Initializer"></a>
 
 ```typescript
@@ -2352,6 +2361,8 @@ public readonly summary: string;
 
 ### CalendarLocationOptionsBase <a name="CalendarLocationOptionsBase" id="@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase"></a>
 
+Options for creating a calendar object.
+
 #### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase.Initializer"></a>
 
 ```typescript
@@ -2364,8 +2375,7 @@ const calendarLocationOptionsBase: CalendarLocationOptionsBase = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase.property.calendarName">calendarName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase.property.calendarPath">calendarPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase.property.calendarName">calendarName</a></code> | <code>string</code> | The name of the calendar file. |
 
 ---
 
@@ -2377,15 +2387,7 @@ public readonly calendarName: string;
 
 - *Type:* string
 
----
-
-##### `calendarPath`<sup>Optional</sup> <a name="calendarPath" id="@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase.property.calendarPath"></a>
-
-```typescript
-public readonly calendarPath: string;
-```
-
-- *Type:* string
+The name of the calendar file.
 
 ---
 
@@ -3620,6 +3622,8 @@ public subnets is not allowed (unless `allowPublicSubnet` is set to `true`).
 
 ### ChangeControllerProps <a name="ChangeControllerProps" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps"></a>
 
+Properties used to create change controller.
+
 #### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.Initializer"></a>
 
 ```typescript
@@ -3632,10 +3636,10 @@ const changeControllerProps: ChangeControllerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.calendar">calendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.schedule">schedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.stage">stage</a></code> | <code>aws-cdk-lib.aws_codepipeline.IStage</code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.calendar">calendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | The calendar object. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.schedule">schedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | The schedule on which to check the calendar and alarm state. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | The terms to search for in alarm descriptions. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.stage">stage</a></code> | <code>aws-cdk-lib.aws_codepipeline.IStage</code> | The pipeline stage. |
 
 ---
 
@@ -3647,6 +3651,8 @@ public readonly calendar: Calendar;
 
 - *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a>
 
+The calendar object.
+
 ---
 
 ##### `schedule`<sup>Required</sup> <a name="schedule" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.schedule"></a>
@@ -3656,6 +3662,8 @@ public readonly schedule: Schedule;
 ```
 
 - *Type:* aws-cdk-lib.aws_events.Schedule
+
+The schedule on which to check the calendar and alarm state.
 
 ---
 
@@ -3667,6 +3675,11 @@ public readonly searchTerms: string[];
 
 - *Type:* string[]
 
+The terms to search for in alarm descriptions.
+
+These if these alarms are in ALARM state, the change controller will close
+the pipeline stage.
+
 ---
 
 ##### `stage`<sup>Required</sup> <a name="stage" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerProps.property.stage"></a>
@@ -3676,6 +3689,8 @@ public readonly stage: IStage;
 ```
 
 - *Type:* aws-cdk-lib.aws_codepipeline.IStage
+
+The pipeline stage.
 
 ---
 
@@ -3709,7 +3724,54 @@ public readonly searchTerms: string[];
 
 ---
 
+### LocalPathOptions <a name="LocalPathOptions" id="@cdklabs/cdk-codepipeline-extensions.LocalPathOptions"></a>
+
+Options for creating a calendar from a local file path.
+
+#### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.LocalPathOptions.Initializer"></a>
+
+```typescript
+import { LocalPathOptions } from '@cdklabs/cdk-codepipeline-extensions'
+
+const localPathOptions: LocalPathOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.LocalPathOptions.property.calendarName">calendarName</a></code> | <code>string</code> | The name of the calendar file. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.LocalPathOptions.property.calendarPath">calendarPath</a></code> | <code>string</code> | The relative path to the calendar file. |
+
+---
+
+##### `calendarName`<sup>Required</sup> <a name="calendarName" id="@cdklabs/cdk-codepipeline-extensions.LocalPathOptions.property.calendarName"></a>
+
+```typescript
+public readonly calendarName: string;
+```
+
+- *Type:* string
+
+The name of the calendar file.
+
+---
+
+##### `calendarPath`<sup>Required</sup> <a name="calendarPath" id="@cdklabs/cdk-codepipeline-extensions.LocalPathOptions.property.calendarPath"></a>
+
+```typescript
+public readonly calendarPath: string;
+```
+
+- *Type:* string
+
+The relative path to the calendar file.
+
+---
+
 ### PipelineWithChangeControlProps <a name="PipelineWithChangeControlProps" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps"></a>
+
+Props for creating a pipeline with a change controller.
 
 #### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.Initializer"></a>
 
@@ -3723,12 +3785,12 @@ const pipelineWithChangeControlProps: PipelineWithChangeControlProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.changeControlCalendar">changeControlCalendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.changeControlCheckSchedule">changeControlCheckSchedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.pipelineName">pipelineName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.sourceRepository">sourceRepository</a></code> | <code>aws-cdk-lib.aws_codecommit.IRepository</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.pipelineRole">pipelineRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.changeControlCalendar">changeControlCalendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | The calendar used for determining time windows. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.changeControlCheckSchedule">changeControlCheckSchedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | The schedule on which to check the calendar. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.pipelineName">pipelineName</a></code> | <code>string</code> | The name of the pipeline. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | The terms in the alarm descriptions to search for. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.sourceRepository">sourceRepository</a></code> | <code>aws-cdk-lib.aws_codecommit.IRepository</code> | The AWS CodeCommit repository to be used as the source stage. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.pipelineRole">pipelineRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role used for running the pipeline. |
 
 ---
 
@@ -3740,6 +3802,8 @@ public readonly changeControlCalendar: Calendar;
 
 - *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a>
 
+The calendar used for determining time windows.
+
 ---
 
 ##### `changeControlCheckSchedule`<sup>Required</sup> <a name="changeControlCheckSchedule" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.changeControlCheckSchedule"></a>
@@ -3749,6 +3813,8 @@ public readonly changeControlCheckSchedule: Schedule;
 ```
 
 - *Type:* aws-cdk-lib.aws_events.Schedule
+
+The schedule on which to check the calendar.
 
 ---
 
@@ -3760,6 +3826,8 @@ public readonly pipelineName: string;
 
 - *Type:* string
 
+The name of the pipeline.
+
 ---
 
 ##### `searchTerms`<sup>Required</sup> <a name="searchTerms" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.searchTerms"></a>
@@ -3769,6 +3837,11 @@ public readonly searchTerms: string[];
 ```
 
 - *Type:* string[]
+
+The terms in the alarm descriptions to search for.
+
+These if the alarms containing those search terms are in ALARM,
+the stage transition will be closed.
 
 ---
 
@@ -3780,6 +3853,8 @@ public readonly sourceRepository: IRepository;
 
 - *Type:* aws-cdk-lib.aws_codecommit.IRepository
 
+The AWS CodeCommit repository to be used as the source stage.
+
 ---
 
 ##### `pipelineRole`<sup>Optional</sup> <a name="pipelineRole" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControlProps.property.pipelineRole"></a>
@@ -3789,10 +3864,15 @@ public readonly pipelineRole: IRole;
 ```
 
 - *Type:* aws-cdk-lib.aws_iam.IRole
+- *Default:* A new role is created when the pipeline is created.
+
+The role used for running the pipeline.
 
 ---
 
 ### S3LocationOptions <a name="S3LocationOptions" id="@cdklabs/cdk-codepipeline-extensions.S3LocationOptions"></a>
+
+Options for creating a calendar from a file in a S3 Bucket.
 
 #### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.Initializer"></a>
 
@@ -3806,10 +3886,9 @@ const s3LocationOptions: S3LocationOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.calendarName">calendarName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.calendarPath">calendarPath</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.calendarName">calendarName</a></code> | <code>string</code> | The name of the calendar file. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The bucket where the calendar is stored. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role used for getting the calendar file. |
 
 ---
 
@@ -3821,15 +3900,7 @@ public readonly calendarName: string;
 
 - *Type:* string
 
----
-
-##### `calendarPath`<sup>Optional</sup> <a name="calendarPath" id="@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.calendarPath"></a>
-
-```typescript
-public readonly calendarPath: string;
-```
-
-- *Type:* string
+The name of the calendar file.
 
 ---
 
@@ -3841,6 +3912,8 @@ public readonly bucket: IBucket;
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
 
+The bucket where the calendar is stored.
+
 ---
 
 ##### `role`<sup>Optional</sup> <a name="role" id="@cdklabs/cdk-codepipeline-extensions.S3LocationOptions.property.role"></a>
@@ -3851,11 +3924,15 @@ public readonly role: IRole;
 
 - *Type:* aws-cdk-lib.aws_iam.IRole
 
+The role used for getting the calendar file.
+
 ---
 
 ## Classes <a name="Classes" id="Classes"></a>
 
 ### Calendar <a name="Calendar" id="@cdklabs/cdk-codepipeline-extensions.Calendar"></a>
+
+The calendar for determining if pipeline stage should be open or closed.
 
 #### Initializers <a name="Initializers" id="@cdklabs/cdk-codepipeline-extensions.Calendar.Initializer"></a>
 
@@ -3885,12 +3962,12 @@ new Calendar()
 ```typescript
 import { Calendar } from '@cdklabs/cdk-codepipeline-extensions'
 
-Calendar.path(options: CalendarLocationOptionsBase)
+Calendar.path(options: LocalPathOptions)
 ```
 
 ###### `options`<sup>Required</sup> <a name="options" id="@cdklabs/cdk-codepipeline-extensions.Calendar.path.parameter.options"></a>
 
-- *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase">CalendarLocationOptionsBase</a>
+- *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.LocalPathOptions">LocalPathOptions</a>
 
 ---
 
@@ -4027,21 +4104,27 @@ public readonly reason: string;
 
 ### CalendarSourceType <a name="CalendarSourceType" id="@cdklabs/cdk-codepipeline-extensions.CalendarSourceType"></a>
 
+The source types for the calendar file.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSourceType.S3_OBJECT">S3_OBJECT</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSourceType.PATH">PATH</a></code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSourceType.S3_OBJECT">S3_OBJECT</a></code> | The calendar source is an S3 Bucket. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSourceType.PATH">PATH</a></code> | The calendar source is a local path. |
 
 ---
 
 ##### `S3_OBJECT` <a name="S3_OBJECT" id="@cdklabs/cdk-codepipeline-extensions.CalendarSourceType.S3_OBJECT"></a>
 
+The calendar source is an S3 Bucket.
+
 ---
 
 
 ##### `PATH` <a name="PATH" id="@cdklabs/cdk-codepipeline-extensions.CalendarSourceType.PATH"></a>
+
+The calendar source is a local path.
 
 ---
 

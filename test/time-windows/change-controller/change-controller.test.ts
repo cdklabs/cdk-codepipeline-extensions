@@ -1,3 +1,4 @@
+import path from 'path';
 import { Duration, Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { BuildSpec, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
@@ -53,7 +54,10 @@ describe('Change Controller Tests', () => {
       })
     );
 
-  const calendar = Calendar.path({ calendarName: 'calendar.ics' });
+  const calendar = Calendar.path({
+    calendarName: 'calendar.ics',
+    calendarPath: path.join(__dirname),
+  });
   new ChangeController(stack, 'test-change-controller', {
     calendar,
     stage,

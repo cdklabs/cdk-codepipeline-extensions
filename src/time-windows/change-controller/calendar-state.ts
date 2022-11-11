@@ -6,6 +6,11 @@ export type CalendarState = {
   summary: string;
 };
 
+/**
+ * Gets the state of the calendar at the current time.
+ * @param calendarName The name of the calendar
+ * @returns A CalendarState object.
+ */
 export const getCalendarState = async (
   calendarName: string
 ): Promise<CalendarState> => {

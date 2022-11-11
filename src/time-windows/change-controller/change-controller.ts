@@ -10,13 +10,40 @@ import { Construct } from 'constructs';
 import { Calendar } from '../calendar/calendar';
 import { ChangeControllerFunction } from './change-controller-function';
 
+/**
+ * Properties used to create change controller.
+ */
 export interface ChangeControllerProps {
+  /**
+   * The calendar object.
+   */
   readonly calendar: Calendar;
+
+  /**
+   * The pipeline stage.
+   */
   readonly stage: IStage;
+
+  /**
+   * The schedule on which to check the calendar and alarm state.
+   */
   readonly schedule: Schedule;
+
+  /**
+   * The terms to search for in alarm descriptions.
+   *
+   * These if these alarms are in ALARM state, the change controller will close
+   * the pipeline stage.
+   */
   readonly searchTerms: string[];
 }
 
+/**
+ * A change controller. When added to a stage in a pipeline, this will check against
+ * a calendar and enable or disable the stage transition based off that calendar,
+ * defaulting to closed when the calendar cannot be found or when
+ * the check against it fails. It also checks to against alarms.
+ */
 export class ChangeController extends Construct {
   constructor(scope: Construct, id: string, props: ChangeControllerProps) {
     super(scope, id);

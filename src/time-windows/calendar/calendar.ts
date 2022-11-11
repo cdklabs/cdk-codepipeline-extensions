@@ -8,30 +8,65 @@ import { Provider } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 import { CalendarSetupFunction } from './calendar-setup-function';
 
+/**
+ * Options for creating a calendar object.
+ */
 export interface CalendarLocationOptionsBase {
+  /**
+   * The name of the calendar file.
+   */
   readonly calendarName: string;
-  readonly calendarPath?: string;
 }
 
+/**
+ * Options for creating a calendar from a local file path
+ */
+export interface LocalPathOptions extends CalendarLocationOptionsBase {
+  /**
+   * The relative path to the calendar file.
+   */
+  readonly calendarPath: string;
+}
+
+/**
+ * Options for creating a calendar from a file in a S3 Bucket.
+ */
 export interface S3LocationOptions extends CalendarLocationOptionsBase {
+  /**
+   * The bucket where the calendar is stored.
+   */
   readonly bucket: IBucket;
+
+  /**
+   * The role used for getting the calendar file.
+   */
   readonly role?: IRole;
 }
 
+/**
+ * The source types for the calendar file.
+ */
 export enum CalendarSourceType {
+  /**
+   * The calendar source is an S3 Bucket.
+   */
   S3_OBJECT = 's3Object',
+
+  /**
+   * The calendar source is a local path.
+   */
   PATH = 'path',
 }
 
+/**
+ * The calendar for determining if pipeline stage should be open or closed.
+ */
 export abstract class Calendar {
-  public static path(options: CalendarLocationOptionsBase): Calendar {
+  public static path(options: LocalPathOptions): Calendar {
     return new (class extends Calendar {
       public _bind(scope: Construct): Calendar {
-        const localPath = options.calendarPath
-          ? options.calendarPath
-          : __dirname;
         const calendarBody = fs.readFileSync(
-          path.join(localPath, options.calendarName),
+          path.join(options.calendarPath, options.calendarName),
           { encoding: 'utf-8' }
         );
 
@@ -79,13 +114,34 @@ export abstract class Calendar {
   public abstract _bind(scope: Construct): any;
 }
 
+/**
+ * Options for defining a CustomResourceCalendar
+ */
 interface CustomResourceCalendarOptions extends CalendarLocationOptionsBase {
+  /*
+   * The type of calendar source.
+   */
   sourceType: CalendarSourceType;
+
+  /**
+   * The contents of the calendar.
+   */
   calendarBody?: string;
+
+  /**
+   * The S3 bucket where the calendar file is stored.
+   */
   bucketName?: string;
+
+  /**
+   * The role used for getting the calendar file.
+   */
   roleArn?: string;
 }
 
+/**
+ * The custom resource for getting the calendar and uploading it to SSM.
+ */
 class CustomResourceCalendar extends Calendar {
   constructor(scope: Construct, options: CustomResourceCalendarOptions) {
     super();
@@ -124,7 +180,7 @@ class CustomResourceCalendar extends Calendar {
       properties: {
         sourceType: options.sourceType,
         calendarBody: options.calendarBody,
-        calendarPath: options.calendarPath,
+        bucketName: options.bucketName,
         calendarName: options.calendarName,
         roleArn: options.roleArn,
       },

@@ -17,15 +17,49 @@ import { Construct } from 'constructs';
 import { Calendar } from '../time-windows/calendar/calendar';
 import { ChangeController } from '../time-windows/change-controller/change-controller';
 
+/**
+ * Props for creating a pipeline with a change controller.
+ */
 export interface PipelineWithChangeControlProps {
-  readonly changeControlCalendar: Calendar;
+  /**
+   * The name of the pipeline.
+   */
   readonly pipelineName: string;
+
+  /**
+   * The role used for running the pipeline.
+   *
+   * @default - A new role is created when the pipeline is created.
+   */
   readonly pipelineRole?: IRole;
+
+  /**
+   * The AWS CodeCommit repository to be used as the source stage.
+   */
   readonly sourceRepository: IRepository;
+
+  /**
+   * The calendar used for determining time windows.
+   */
+  readonly changeControlCalendar: Calendar;
+
+  /**
+   * The schedule on which to check the calendar.
+   */
   readonly changeControlCheckSchedule: Schedule;
+
+  /**
+   * The terms in the alarm descriptions to search for.
+   *
+   * These if the alarms containing those search terms are in ALARM,
+   * the stage transition will be closed.
+   */
   readonly searchTerms: string[];
 }
 
+/**
+ * A pipeline with a change controller.
+ */
 export class PipelineWithChangeControl extends Construct {
   constructor(
     scope: Construct,
@@ -74,14 +108,18 @@ export class PipelineWithChangeControl extends Construct {
             commands: ['yarn install'],
           },
           build: {
-            commands: ['echo Build started on `date`', 'yarn build'],
+            commands: [
+              'echo Build started on `date`',
+              'yarn build',
+              'yarn cdk synth',
+            ],
           },
           post_build: {
             commands: ['echo Build completed on `date`'],
           },
         },
         artifacts: {
-          files: ['build/**/*', 'node_modules/**/*', 'src/*'],
+          files: ['cdk.out/**/*', 'node_modules/**/*', 'lib/*'],
         },
       }),
       environment: {
@@ -118,7 +156,10 @@ export class PipelineWithChangeControl extends Construct {
             commands: ['npm install -g aws-cdk'],
           },
           build: {
-            commands: ['echo Deploy started on `date`', 'cdk deploy'],
+            commands: [
+              'echo Deploy started on `date`',
+              'cdk deploy --app cdk.out',
+            ],
           },
           post_build: {
             commands: ['echo Deploy completed on `date`'],
