@@ -62,6 +62,10 @@ export enum CalendarSourceType {
  * The calendar for determining if pipeline stage should be open or closed.
  */
 export abstract class Calendar {
+
+  /**
+    * Creates a calendar from a local file.
+    */
   public static path(options: LocalPathOptions): Calendar {
     return new (class extends Calendar {
       public _bind(scope: Construct): Calendar {
@@ -84,6 +88,9 @@ export abstract class Calendar {
     })();
   }
 
+   /**
+    * Creates a calendar from a S3 bucket.
+    */
   public static s3Location(options: S3LocationOptions): Calendar {
     return new (class extends Calendar {
       public _bind(scope: Construct): Calendar {
@@ -102,7 +109,14 @@ export abstract class Calendar {
     })();
   }
 
+  /**
+   * The name of the calendar.
+   */
   public calendarName!: string;
+
+  /**
+   * The ARN of the calendar in SSM.
+   */
   public calendarArn!: string;
 
   protected constructor() {}
