@@ -18,6 +18,7 @@
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",
+    "copy-test-assets": "npx projen copy-test-assets",
     "default": "npx projen default",
     "docgen": "npx projen docgen",
     "eject": "npx projen eject",
