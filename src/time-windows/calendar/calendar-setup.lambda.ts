@@ -2,7 +2,7 @@ import {
   OnEventRequest,
   OnEventResponse,
 } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types'; // eslint-disable-line import/no-unresolved
-import { S3, SSM } from 'aws-sdk';
+import { S3, SSM, STS } from 'aws-sdk';
 import { CalendarSourceType } from './calendar';
 
 export const handler = async (
@@ -12,13 +12,14 @@ export const handler = async (
 
   const bucketName = event.ResourceProperties.bucketName;
   const calendarName = event.ResourceProperties.calendarName;
+  const roleArn = event.ResourceProperties.roleArn;
 
   let calendar: string;
 
   if (event.ResourceProperties.sourceType === CalendarSourceType.PATH) {
     calendar = event.ResourceProperties.calendarBody;
   } else {
-    const s3 = new S3();
+    const s3 = roleArn ? await getSession(roleArn) : new S3();
     calendar = (
       await s3
         .getObject({
@@ -64,4 +65,21 @@ export const handler = async (
   }
 
   return {};
+};
+
+const getSession = async (roleArn: string) => {
+  const sts = new STS();
+  const crentials = await sts
+    .assumeRole({
+      RoleArn: roleArn,
+      RoleSessionName: 'Calendar-Setup-Role',
+    })
+    .promise();
+  return new S3({
+    credentials: {
+      accessKeyId: crentials.Credentials!.AccessKeyId,
+      secretAccessKey: crentials.Credentials!.SecretAccessKey,
+      sessionToken: crentials.Credentials?.SessionToken,
+    },
+  });
 };

@@ -3952,8 +3952,8 @@ new Calendar()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.path">path</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.s3Location">s3Location</a></code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.path">path</a></code> | Creates a calendar from a local file. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.s3Location">s3Location</a></code> | Creates a calendar from a S3 bucket. |
 
 ---
 
@@ -3964,6 +3964,8 @@ import { Calendar } from '@cdklabs/cdk-codepipeline-extensions'
 
 Calendar.path(options: LocalPathOptions)
 ```
+
+Creates a calendar from a local file.
 
 ###### `options`<sup>Required</sup> <a name="options" id="@cdklabs/cdk-codepipeline-extensions.Calendar.path.parameter.options"></a>
 
@@ -3979,6 +3981,8 @@ import { Calendar } from '@cdklabs/cdk-codepipeline-extensions'
 Calendar.s3Location(options: S3LocationOptions)
 ```
 
+Creates a calendar from a S3 bucket.
+
 ###### `options`<sup>Required</sup> <a name="options" id="@cdklabs/cdk-codepipeline-extensions.Calendar.s3Location.parameter.options"></a>
 
 - *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.S3LocationOptions">S3LocationOptions</a>
@@ -3989,8 +3993,8 @@ Calendar.s3Location(options: S3LocationOptions)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.property.calendarArn">calendarArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.property.calendarName">calendarName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.property.calendarArn">calendarArn</a></code> | <code>string</code> | The ARN of the calendar in SSM. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar.property.calendarName">calendarName</a></code> | <code>string</code> | The name of the calendar. |
 
 ---
 
@@ -4002,6 +4006,8 @@ public readonly calendarArn: string;
 
 - *Type:* string
 
+The ARN of the calendar in SSM.
+
 ---
 
 ##### `calendarName`<sup>Required</sup> <a name="calendarName" id="@cdklabs/cdk-codepipeline-extensions.Calendar.property.calendarName"></a>
@@ -4011,6 +4017,8 @@ public readonly calendarName: string;
 ```
 
 - *Type:* string
+
+The name of the calendar.
 
 ---
 

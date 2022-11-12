@@ -1,3 +1,4 @@
+import { Arn, ArnFormat, Stack } from 'aws-cdk-lib';
 import {
   BuildSpec,
   ComputeType,
@@ -12,7 +13,7 @@ import {
   CodeCommitTrigger,
 } from 'aws-cdk-lib/aws-codepipeline-actions';
 import { Schedule } from 'aws-cdk-lib/aws-events';
-import { IRole } from 'aws-cdk-lib/aws-iam';
+import { IRole, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { Calendar } from '../time-windows/calendar/calendar';
 import { ChangeController } from '../time-windows/change-controller/change-controller';
@@ -172,6 +173,52 @@ export class PipelineWithChangeControl extends Construct {
         computeType: ComputeType.SMALL,
       },
     });
+
+    const policyStatement = new PolicyStatement({
+      actions: ['cloudformation:DescribeStacks', 'ssm:GetParameter'],
+      resources: ['*'],
+    });
+
+    const cdkDeployRoleArn = Arn.format(
+      {
+        service: 'iam',
+        resource: 'role',
+        resourceName: 'cdk-hnb659fds-deploy-role-*',
+        region: '',
+        arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
+      },
+      Stack.of(this)
+    );
+
+    const cdkLookupRoleArn = Arn.format(
+      {
+        service: 'iam',
+        resource: 'role',
+        resourceName: 'cdk-hnb659fds-lookup-role-*',
+        region: '',
+        arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
+      },
+      Stack.of(this)
+    );
+
+    const cdkPublishingRoleArn = Arn.format(
+      {
+        service: 'iam',
+        resource: 'role',
+        resourceName: 'cdk-hnb659fds-file-publishing-role-*',
+        region: '',
+        arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
+      },
+      Stack.of(this)
+    );
+
+    const assumeRole = new PolicyStatement({
+      actions: ['sts:AssumeRole'],
+      resources: [cdkDeployRoleArn, cdkLookupRoleArn, cdkPublishingRoleArn],
+    });
+
+    deployProject.addToRolePolicy(policyStatement);
+    deployProject.addToRolePolicy(assumeRole);
 
     // CodeBuild Deploy Action
     const deployAction = new CodeBuildAction({
