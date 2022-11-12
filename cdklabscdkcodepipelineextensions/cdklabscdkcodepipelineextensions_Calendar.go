@@ -9,10 +9,12 @@ import (
 // The calendar for determining if pipeline stage should be open or closed.
 // Experimental.
 type Calendar interface {
+	// The ARN of the calendar in SSM.
 	// Experimental.
 	CalendarArn() *string
 	// Experimental.
 	SetCalendarArn(val *string)
+	// The name of the calendar.
 	// Experimental.
 	CalendarName() *string
 	// Experimental.
@@ -78,6 +80,7 @@ func (j *jsiiProxy_Calendar)SetCalendarName(val *string) {
 	)
 }
 
+// Creates a calendar from a local file.
 // Experimental.
 func Calendar_Path(options *LocalPathOptions) Calendar {
 	_init_.Initialize()
@@ -97,6 +100,7 @@ func Calendar_Path(options *LocalPathOptions) Calendar {
 	return returns
 }
 
+// Creates a calendar from a S3 bucket.
 // Experimental.
 func Calendar_S3Location(options *S3LocationOptions) Calendar {
 	_init_.Initialize()
