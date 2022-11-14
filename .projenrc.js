@@ -4,6 +4,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Kendra Neil',
   authorAddress: 'kneil@amazon.com',
   cdkVersion: '2.50.0',
+  constructsVersion: '10.1.159',
   defaultReleaseBranch: 'main',
   name: '@cdklabs/cdk-codepipeline-extensions',
   repositoryUrl: 'https://github.com/cdklabs/cdk-codepipeline-extensions.git',
@@ -37,7 +38,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'This project is for use in the workshop DOP 401: Get better at building AWS CDK constructs.',
   devDeps: [],
   bundledDeps: ['@types/aws-lambda', 'aws-sdk'],
-  constructsVersion: '10.1.157',
   eslintOptions: {
     prettier: true,
   },
