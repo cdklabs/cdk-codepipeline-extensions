@@ -4,7 +4,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Kendra Neil',
   authorAddress: 'kneil@amazon.com',
   cdkVersion: '2.50.0',
-  constructsVersion: '10.1.159',
+  constructsVersion: '10.1.160',
   defaultReleaseBranch: 'main',
   name: '@cdklabs/cdk-codepipeline-extensions',
   repositoryUrl: 'https://github.com/cdklabs/cdk-codepipeline-extensions.git',
