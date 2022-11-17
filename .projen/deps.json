@@ -27,7 +27,7 @@
     },
     {
       "name": "constructs",
-      "version": "10.1.161",
+      "version": "10.0.5",
       "type": "build"
     },
     {
@@ -136,7 +136,7 @@
     },
     {
       "name": "constructs",
-      "version": "^10.1.161",
+      "version": "^10.0.5",
       "type": "peer"
     }
   ],

@@ -88,15 +88,16 @@ export const getAlarms = async (
   const states: IAlarmDetail[] = [];
   try {
     const alarmsForAccountAndRegion = await getCloudwatchAlarms();
-    const alarms = hasAlarmMatching(alarmsForAccountAndRegion, searchTerms).map(
-      (alarm) => {
-        alarm.reason = `${alarm.alarmArn} in ${alarm.state} due to ${alarm.reason}`;
-        return alarm;
-      }
+    states.push(
+      ...hasAlarmMatching(alarmsForAccountAndRegion, searchTerms).map(
+        (alarm) => {
+          alarm.reason = `${alarm.alarmArn} in ${alarm.state} due to ${alarm.reason}`;
+          return alarm;
+        }
+      )
     );
-
-    if (alarms.length === 0) {
-      alarms.push({
+    if (states.length === 0) {
+      states.push({
         state: AlarmState.ALARM,
         reason: `No alarms were found for the provided search terms: ${searchTerms.join(
           ', '
@@ -138,17 +139,17 @@ const hasAlarmMatching = (
   alarms: IAlarmDetail[],
   searchTerms: string[]
 ): IAlarmDetail[] => {
-  return alarms
-    .flatMap((alarm) =>
-      searchTerms
-        .map((searchTerm) => {
-          return alarm.alarmDescription?.includes(searchTerm)
-            ? alarm
-            : undefined;
-        })
-        .filter((sameAlarm) => sameAlarm)
-    )
-    .filter(
-      (sameAlarm, index) => alarms.indexOf(sameAlarm!) === index
-    ) as IAlarmDetail[];
+  return [
+    ...new Set(
+      alarms.flatMap((alarm) =>
+        searchTerms
+          .map((searchTerm) => {
+            return alarm.alarmDescription?.includes(searchTerm)
+              ? alarm
+              : undefined;
+          })
+          .filter((sameAlarm) => sameAlarm)
+      )
+    ),
+  ] as IAlarmDetail[];
 };

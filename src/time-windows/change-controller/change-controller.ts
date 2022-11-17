@@ -82,16 +82,21 @@ export class ChangeController extends Construct {
     );
 
     // Any error in the lambda function will close the time window
-    fn.metricErrors()
-      .with({ statistic: 'sum' })
-      .createAlarm(this, 'change-controller-alarm', {
+    const alarmDescription = 'change-controller-error-alarm';
+
+    fn.metricErrors({ statistic: 'sum' }).createAlarm(
+      this,
+      'change-controller-alarm',
+      {
         alarmName: `ChangeController-${props.stage.pipeline.pipelineName}${props.stage.stageName}`,
         evaluationPeriods: 1,
         threshold: 1,
         comparisonOperator:
           ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         treatMissingData: TreatMissingData.BREACHING,
-      });
+        alarmDescription,
+      }
+    );
 
     // Create a rule to run the lambda on a schedule defined by the user
     new Rule(this, 'Scheduler', {
