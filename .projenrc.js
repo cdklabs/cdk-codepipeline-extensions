@@ -35,8 +35,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   deps: [],
   description:
     'This project is for use in the workshop DOP 401: Get better at building AWS CDK constructs.',
-  devDeps: [],
-  bundledDeps: ['@types/aws-lambda', 'aws-sdk'],
+  devDeps: ['@types/aws-lambda'],
+  bundledDeps: ['aws-sdk'],
   eslintOptions: {
     prettier: true,
   },

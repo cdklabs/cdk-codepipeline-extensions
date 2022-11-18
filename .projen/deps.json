@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@types/aws-lambda",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "version": "^27",
       "type": "build"
@@ -115,10 +119,6 @@
     {
       "name": "typescript",
       "type": "build"
-    },
-    {
-      "name": "@types/aws-lambda",
-      "type": "bundled"
     },
     {
       "name": "aws-sdk",

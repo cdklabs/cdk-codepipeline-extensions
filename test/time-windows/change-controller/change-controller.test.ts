@@ -184,7 +184,7 @@ describe('Change Controller Tests', () => {
             'Fn::Join': [
               '',
               [
-                '{"calendar":{"calendarArn":"test-calendar"},"searchTerms":["test-search-term"],"stageName":"Source","pipelineName":"',
+                '{"calendar":{"calendarArn":"test-calendar"},"searchTerms":["test-search-term","change-controller-error-alarm"],"stageName":"Source","pipelineName":"',
                 Match.anyValue(),
                 '"}',
               ],

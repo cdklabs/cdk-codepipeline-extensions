@@ -99,6 +99,8 @@ export class ChangeController extends Construct {
     );
 
     // Create a rule to run the lambda on a schedule defined by the user
+    const searchTerms = props.searchTerms.concat(alarmDescription);
+
     new Rule(this, 'Scheduler', {
       ruleName: fn.functionName,
       schedule: props.schedule,
@@ -106,7 +108,7 @@ export class ChangeController extends Construct {
         new LambdaFunction(fn, {
           event: RuleTargetInput.fromObject({
             calendar: props.calendar,
-            searchTerms: props.searchTerms,
+            searchTerms,
             stageName: props.stage.stageName,
             pipelineName: props.stage.pipeline.pipelineName,
           }),
