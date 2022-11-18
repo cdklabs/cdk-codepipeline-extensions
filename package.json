@@ -154,7 +154,7 @@
         "packageId": "Cdklabs.CdkCodePipelineExtensions"
       },
       "go": {
-        "moduleName": "github.com/cdklabs/cdk-codepipeline-extensions"
+        "moduleName": "github.com/cdklabs/cdk-codepipeline-extensions-go"
       }
     },
     "tsc": {

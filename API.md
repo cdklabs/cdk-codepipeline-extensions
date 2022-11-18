@@ -3879,6 +3879,7 @@ public readonly role: IRole;
 ```
 
 - *Type:* aws-cdk-lib.aws_iam.IRole
+- *Default:* A role created by the Custom Resource.
 
 The role used for getting the calendar file.
 

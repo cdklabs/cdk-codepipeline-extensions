@@ -15,7 +15,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   stability: Stability.EXPERIMENTAL,
   npmAccess: 'public',
   publishToGo: {
-    moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions',
+    moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions-go',
   },
   publishToMaven: {
     javaPackage: 'io.github.cdklabs.cdk.codepipeline.extensions',

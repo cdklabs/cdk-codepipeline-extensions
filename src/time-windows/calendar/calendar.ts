@@ -39,6 +39,8 @@ export interface S3LocationOptions extends CalendarLocationOptionsBase {
 
   /**
    * The role used for getting the calendar file.
+   *
+   * @default - A role created by the Custom Resource.
    */
   readonly role?: IRole;
 }
@@ -138,16 +140,23 @@ interface CustomResourceCalendarOptions extends CalendarLocationOptionsBase {
 
   /**
    * The contents of the calendar.
+   *
+   * @default - None. If this is empty, the calendar is being fetched from S3.
    */
   calendarBody?: string;
 
   /**
    * The S3 bucket where the calendar file is stored.
+   *
+   * @default - None. If this is empty, the calendar is being fetched from a local file path.
    */
   bucketName?: string;
 
   /**
    * The role used for getting the calendar file.
+   *
+   * @default - None. If this is empty, the calendar is either being fetched from a local file path or the S3 session
+   * will be created with the credentials already in use.
    */
   roleArn?: string;
 }
