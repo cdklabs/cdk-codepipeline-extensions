@@ -2921,6 +2921,8 @@ public subnets is not allowed (unless `allowPublicSubnet` is set to `true`).
 
 ### ChangeControllerEvent <a name="ChangeControllerEvent" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent"></a>
 
+The event inputs required for the ChangeController lambda function.
+
 #### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.Initializer"></a>
 
 ```typescript
@@ -2933,10 +2935,10 @@ const changeControllerEvent: ChangeControllerEvent = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.calendar">calendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.pipelineName">pipelineName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.stageName">stageName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.calendar">calendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | The calendar used to determine whether a stage transition should be opened or closed. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.pipelineName">pipelineName</a></code> | <code>string</code> | The name of the pipeline the Change Controller will be added to. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | The terms in alarm descriptions to seach for to determine if alarms should be checked. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.stageName">stageName</a></code> | <code>string</code> | The name of the stage the Change Controller will be added to. |
 
 ---
 
@@ -2948,6 +2950,8 @@ public readonly calendar: Calendar;
 
 - *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a>
 
+The calendar used to determine whether a stage transition should be opened or closed.
+
 ---
 
 ##### `pipelineName`<sup>Required</sup> <a name="pipelineName" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.pipelineName"></a>
@@ -2957,6 +2961,8 @@ public readonly pipelineName: string;
 ```
 
 - *Type:* string
+
+The name of the pipeline the Change Controller will be added to.
 
 ---
 
@@ -2968,6 +2974,10 @@ public readonly searchTerms: string[];
 
 - *Type:* string[]
 
+The terms in alarm descriptions to seach for to determine if alarms should be checked.
+
+If any of the alarms matching these search terms are in ALARM state, the stage transition will be closed.
+
 ---
 
 ##### `stageName`<sup>Required</sup> <a name="stageName" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.stageName"></a>
@@ -2977,6 +2987,8 @@ public readonly stageName: string;
 ```
 
 - *Type:* string
+
+The name of the stage the Change Controller will be added to.
 
 ---
 
