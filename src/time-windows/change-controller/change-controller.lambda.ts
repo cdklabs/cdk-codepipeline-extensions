@@ -1,11 +1,11 @@
-import { getAggregateAlarmState } from '../../common/alarm-state';
-import { Calendar } from '../calendar/calendar';
 import { getCalendarState } from './calendar-state';
 import {
   disableStageTransition,
   enableStageTransition,
   getStageState,
 } from './pipeline-state';
+import { getAggregateAlarmState } from '../../common/alarm-state';
+import { Calendar } from '../calendar/calendar';
 
 /**
  * The event inputs required for the ChangeController lambda function.

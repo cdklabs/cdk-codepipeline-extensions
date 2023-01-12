@@ -7,8 +7,8 @@ import { Rule, RuleTargetInput, Schedule } from 'aws-cdk-lib/aws-events';
 import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
-import { Calendar } from '../calendar/calendar';
 import { ChangeControllerFunction } from './change-controller-function';
+import { Calendar } from '../calendar/calendar';
 
 /**
  * Properties used to create change controller.
