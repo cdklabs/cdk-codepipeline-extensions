@@ -38,11 +38,11 @@
   },
   "ignorePatterns": [
     "*.js",
-    "!.projenrc.js",
     "*.d.ts",
     "node_modules/",
     "*.generated.ts",
-    "coverage"
+    "coverage",
+    "!.projenrc.js"
   ],
   "rules": {
     "prettier/prettier": [
@@ -139,19 +139,19 @@
   "overrides": [
     {
       "files": [
+        "*-function.ts"
+      ],
+      "rules": {
+        "prettier/prettier": "off"
+      }
+    },
+    {
+      "files": [
         ".projenrc.js"
       ],
       "rules": {
         "@typescript-eslint/no-require-imports": "off",
         "import/no-extraneous-dependencies": "off"
-      }
-    },
-    {
-      "files": [
-        "*-function.ts"
-      ],
-      "rules": {
-        "prettier/prettier": "off"
       }
     }
   ]
