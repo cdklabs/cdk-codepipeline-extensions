@@ -61,7 +61,7 @@
       "description": "Create a JavaScript bundle from src/autorollback/autorollback.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -70,7 +70,7 @@
       "description": "Continuously update the JavaScript bundle from src/autorollback/autorollback.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -79,7 +79,7 @@
       "description": "Create a JavaScript bundle from src/time-windows/calendar/calendar-setup.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -88,7 +88,7 @@
       "description": "Continuously update the JavaScript bundle from src/time-windows/calendar/calendar-setup.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -97,7 +97,7 @@
       "description": "Create a JavaScript bundle from src/time-windows/change-controller/change-controller.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -106,7 +106,7 @@
       "description": "Continuously update the JavaScript bundle from src/time-windows/change-controller/change-controller.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -387,19 +387,19 @@
           "exec": "yarn upgrade npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='aws-cdk-lib,constructs'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='aws-cdk-lib,constructs'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='aws-cdk-lib,constructs'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='aws-cdk-lib,constructs'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='aws-cdk-lib,constructs'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii'"
         },
         {
           "exec": "yarn install --check-files"
