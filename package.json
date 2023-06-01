@@ -68,7 +68,7 @@
     "jsii-pacmak": "^1.82.0",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.71.76",
+    "projen": "^0.71.80",
     "standard-version": "^9",
     "ts-jest": "^27",
     "typescript": "^4.9.5"
@@ -78,7 +78,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1387.0"
+    "aws-sdk": "^2.1388.0"
   },
   "bundledDependencies": [
     "aws-sdk"
