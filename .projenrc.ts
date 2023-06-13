@@ -1,11 +1,12 @@
-const { awscdk } = require('projen');
-const { Stability } = require('projen/lib/cdk');
+import { awscdk, javascript } from 'projen';
+import { Stability } from 'projen/lib/cdk';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Kendra Neil',
   authorAddress: 'kneil@amazon.com',
   cdkVersion: '2.50.0',
   defaultReleaseBranch: 'main',
   name: '@cdklabs/cdk-codepipeline-extensions',
+  projenrcTs: true,
   repositoryUrl: 'https://github.com/cdklabs/cdk-codepipeline-extensions.git',
   autoApproveUpgrades: true,
   autoApproveOptions: {
@@ -13,7 +14,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     secret: 'GITHUB_TOKEN',
   },
   stability: Stability.EXPERIMENTAL,
-  npmAccess: 'public',
+  npmAccess: javascript.NpmAccess.PUBLIC,
   publishToGo: {
     moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions-go',
   },
@@ -37,9 +38,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'This project is for use in the workshop DOP 401: Get better at building AWS CDK constructs.',
   devDeps: ['@types/aws-lambda'],
   bundledDeps: ['aws-sdk'],
-  eslintOptions: {
-    prettier: true,
-  },
+  prettier: true,
 });
 
 project.package.addField('prettier', {
@@ -48,14 +47,14 @@ project.package.addField('prettier', {
   trailingComma: 'es5',
 });
 
-project.eslint.addRules({
+project.eslint?.addRules({
   'prettier/prettier': [
     'error',
     { singleQuote: true, semi: true, trailingComma: 'es5' },
   ],
 });
 
-project.eslint.addOverride({
+project.eslint?.addOverride({
   files: ['*-function.ts'],
   rules: { 'prettier/prettier': 'off' },
 });
