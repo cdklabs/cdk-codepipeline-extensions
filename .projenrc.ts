@@ -13,6 +13,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     allowedUsernames: ['cdklabs-automation'],
     secret: 'GITHUB_TOKEN',
   },
+  jsiiReleaseVersion: 'TheRealAmazonKendra/artifact-already-published',
   stability: Stability.EXPERIMENTAL,
   npmAccess: javascript.NpmAccess.PUBLIC,
   publishToGo: {
