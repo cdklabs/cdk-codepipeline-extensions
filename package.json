@@ -46,7 +46,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.122",
+    "@types/aws-lambda": "^8.10.123",
     "@types/jest": "^27",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^6",
@@ -69,7 +69,7 @@
     "jsii-rosetta": "1.x",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.73.39",
+    "projen": "^0.73.40",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
@@ -80,7 +80,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1469.0"
+    "aws-sdk": "^2.1470.0"
   },
   "bundledDependencies": [
     "aws-sdk"
