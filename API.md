@@ -76,6 +76,7 @@ new CalendarSetupFunction(scope: Construct, id: string, props?: CalendarSetupFun
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addAlias">addAlias</a></code> | Defines an alias for this function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addEnvironment">addEnvironment</a></code> | Adds an environment variable to this Lambda function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addLayers">addLayers</a></code> | Adds one or more Lambda Layers to this Lambda function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.invalidateVersionBasedOn">invalidateVersionBasedOn</a></code> | Mix additional information into the hash of the Version object. |
 
 ---
 
@@ -375,8 +376,8 @@ fn.addAlias('Live');
 // Is equivalent to
 
 new lambda.Alias(this, 'AliasLive', {
-   aliasName: 'Live',
-   version: fn.currentVersion,
+  aliasName: 'Live',
+  version: fn.currentVersion,
 });
 ```
 
@@ -443,6 +444,35 @@ Adds one or more Lambda Layers to this Lambda function.
 - *Type:* aws-cdk-lib.aws_lambda.ILayerVersion
 
 the layers to be added.
+
+---
+
+##### `invalidateVersionBasedOn` <a name="invalidateVersionBasedOn" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.invalidateVersionBasedOn"></a>
+
+```typescript
+public invalidateVersionBasedOn(x: string): void
+```
+
+Mix additional information into the hash of the Version object.
+
+The Lambda Function construct does its best to automatically create a new
+Version when anything about the Function changes (its code, its layers,
+any of the other properties).
+
+However, you can sometimes source information from places that the CDK cannot
+look into, like the deploy-time values of SSM parameters. In those cases,
+the CDK would not force the creation of a new Version object when it actually
+should.
+
+This method can be used to invalidate the current Version object. Pass in
+any string into this method, and make sure the string changes when you know
+a new Version needs to be created.
+
+This method may be called more than once.
+
+###### `x`<sup>Required</sup> <a name="x" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.invalidateVersionBasedOn.parameter.x"></a>
+
+- *Type:* string
 
 ---
 
@@ -1203,6 +1233,7 @@ new ChangeControllerFunction(scope: Construct, id: string, props?: ChangeControl
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addAlias">addAlias</a></code> | Defines an alias for this function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addEnvironment">addEnvironment</a></code> | Adds an environment variable to this Lambda function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addLayers">addLayers</a></code> | Adds one or more Lambda Layers to this Lambda function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.invalidateVersionBasedOn">invalidateVersionBasedOn</a></code> | Mix additional information into the hash of the Version object. |
 
 ---
 
@@ -1502,8 +1533,8 @@ fn.addAlias('Live');
 // Is equivalent to
 
 new lambda.Alias(this, 'AliasLive', {
-   aliasName: 'Live',
-   version: fn.currentVersion,
+  aliasName: 'Live',
+  version: fn.currentVersion,
 });
 ```
 
@@ -1570,6 +1601,35 @@ Adds one or more Lambda Layers to this Lambda function.
 - *Type:* aws-cdk-lib.aws_lambda.ILayerVersion
 
 the layers to be added.
+
+---
+
+##### `invalidateVersionBasedOn` <a name="invalidateVersionBasedOn" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.invalidateVersionBasedOn"></a>
+
+```typescript
+public invalidateVersionBasedOn(x: string): void
+```
+
+Mix additional information into the hash of the Version object.
+
+The Lambda Function construct does its best to automatically create a new
+Version when anything about the Function changes (its code, its layers,
+any of the other properties).
+
+However, you can sometimes source information from places that the CDK cannot
+look into, like the deploy-time values of SSM parameters. In those cases,
+the CDK would not force the creation of a new Version object when it actually
+should.
+
+This method can be used to invalidate the current Version object. Pass in
+any string into this method, and make sure the string changes when you know
+a new Version needs to be created.
+
+This method may be called more than once.
+
+###### `x`<sup>Required</sup> <a name="x" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.invalidateVersionBasedOn.parameter.x"></a>
+
+- *Type:* string
 
 ---
 
@@ -2368,6 +2428,7 @@ const calendarSetupFunctionProps: CalendarSetupFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.onFailure">onFailure</a></code> | <code>aws-cdk-lib.aws_lambda.IDestination</code> | The destination for failed invocations. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.onSuccess">onSuccess</a></code> | <code>aws-cdk-lib.aws_lambda.IDestination</code> | The destination for successful invocations. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.retryAttempts">retryAttempts</a></code> | <code>number</code> | The maximum number of times to retry when the function returns an error. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.adotInstrumentation">adotInstrumentation</a></code> | <code>aws-cdk-lib.aws_lambda.AdotInstrumentationConfig</code> | Specify the configuration of AWS Distro for OpenTelemetry (ADOT) instrumentation. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.allowAllOutbound">allowAllOutbound</a></code> | <code>boolean</code> | Whether to allow the Lambda to send all network traffic. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.allowPublicSubnet">allowPublicSubnet</a></code> | <code>boolean</code> | Lambda Functions in a public subnet can NOT access the internet. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.architecture">architecture</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture</code> | The system architectures compatible with this lambda function. |
@@ -2394,6 +2455,7 @@ const calendarSetupFunctionProps: CalendarSetupFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.profilingGroup">profilingGroup</a></code> | <code>aws-cdk-lib.aws_codeguruprofiler.IProfilingGroup</code> | Profiling Group. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.reservedConcurrentExecutions">reservedConcurrentExecutions</a></code> | <code>number</code> | The maximum of concurrent executions you want to reserve for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Lambda execution role. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.runtimeManagementMode">runtimeManagementMode</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeManagementMode</code> | Sets the runtime management configuration for a function's version. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.securityGroups">securityGroups</a></code> | <code>aws-cdk-lib.aws_ec2.ISecurityGroup[]</code> | The list of security groups to associate with the Lambda's network interfaces. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.timeout">timeout</a></code> | <code>aws-cdk-lib.Duration</code> | The function execution time (in seconds) after which Lambda terminates the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.tracing">tracing</a></code> | <code>aws-cdk-lib.aws_lambda.Tracing</code> | Enable AWS X-Ray Tracing for Lambda Function. |
@@ -2457,6 +2519,21 @@ The maximum number of times to retry when the function returns an error.
 
 Minimum: 0
 Maximum: 2
+
+---
+
+##### `adotInstrumentation`<sup>Optional</sup> <a name="adotInstrumentation" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.adotInstrumentation"></a>
+
+```typescript
+public readonly adotInstrumentation: AdotInstrumentationConfig;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.AdotInstrumentationConfig
+- *Default:* No ADOT instrumentation
+
+Specify the configuration of AWS Distro for OpenTelemetry (ADOT) instrumentation.
+
+> [https://aws-otel.github.io/docs/getting-started/lambda](https://aws-otel.github.io/docs/getting-started/lambda)
 
 ---
 
@@ -2853,6 +2930,19 @@ The relevant managed policies are "service-role/AWSLambdaBasicExecutionRole" and
 
 ---
 
+##### `runtimeManagementMode`<sup>Optional</sup> <a name="runtimeManagementMode" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.runtimeManagementMode"></a>
+
+```typescript
+public readonly runtimeManagementMode: RuntimeManagementMode;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.RuntimeManagementMode
+- *Default:* Auto
+
+Sets the runtime management configuration for a function's version.
+
+---
+
 ##### `securityGroups`<sup>Optional</sup> <a name="securityGroups" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.securityGroups"></a>
 
 ```typescript
@@ -3025,6 +3115,7 @@ const changeControllerFunctionProps: ChangeControllerFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.onFailure">onFailure</a></code> | <code>aws-cdk-lib.aws_lambda.IDestination</code> | The destination for failed invocations. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.onSuccess">onSuccess</a></code> | <code>aws-cdk-lib.aws_lambda.IDestination</code> | The destination for successful invocations. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.retryAttempts">retryAttempts</a></code> | <code>number</code> | The maximum number of times to retry when the function returns an error. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.adotInstrumentation">adotInstrumentation</a></code> | <code>aws-cdk-lib.aws_lambda.AdotInstrumentationConfig</code> | Specify the configuration of AWS Distro for OpenTelemetry (ADOT) instrumentation. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.allowAllOutbound">allowAllOutbound</a></code> | <code>boolean</code> | Whether to allow the Lambda to send all network traffic. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.allowPublicSubnet">allowPublicSubnet</a></code> | <code>boolean</code> | Lambda Functions in a public subnet can NOT access the internet. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.architecture">architecture</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture</code> | The system architectures compatible with this lambda function. |
@@ -3051,6 +3142,7 @@ const changeControllerFunctionProps: ChangeControllerFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.profilingGroup">profilingGroup</a></code> | <code>aws-cdk-lib.aws_codeguruprofiler.IProfilingGroup</code> | Profiling Group. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.reservedConcurrentExecutions">reservedConcurrentExecutions</a></code> | <code>number</code> | The maximum of concurrent executions you want to reserve for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Lambda execution role. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.runtimeManagementMode">runtimeManagementMode</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeManagementMode</code> | Sets the runtime management configuration for a function's version. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.securityGroups">securityGroups</a></code> | <code>aws-cdk-lib.aws_ec2.ISecurityGroup[]</code> | The list of security groups to associate with the Lambda's network interfaces. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.timeout">timeout</a></code> | <code>aws-cdk-lib.Duration</code> | The function execution time (in seconds) after which Lambda terminates the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.tracing">tracing</a></code> | <code>aws-cdk-lib.aws_lambda.Tracing</code> | Enable AWS X-Ray Tracing for Lambda Function. |
@@ -3114,6 +3206,21 @@ The maximum number of times to retry when the function returns an error.
 
 Minimum: 0
 Maximum: 2
+
+---
+
+##### `adotInstrumentation`<sup>Optional</sup> <a name="adotInstrumentation" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.adotInstrumentation"></a>
+
+```typescript
+public readonly adotInstrumentation: AdotInstrumentationConfig;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.AdotInstrumentationConfig
+- *Default:* No ADOT instrumentation
+
+Specify the configuration of AWS Distro for OpenTelemetry (ADOT) instrumentation.
+
+> [https://aws-otel.github.io/docs/getting-started/lambda](https://aws-otel.github.io/docs/getting-started/lambda)
 
 ---
 
@@ -3507,6 +3614,19 @@ provide a Role, you must add the relevant AWS managed policies yourself.
 
 The relevant managed policies are "service-role/AWSLambdaBasicExecutionRole" and
 "service-role/AWSLambdaVPCAccessExecutionRole".
+
+---
+
+##### `runtimeManagementMode`<sup>Optional</sup> <a name="runtimeManagementMode" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.runtimeManagementMode"></a>
+
+```typescript
+public readonly runtimeManagementMode: RuntimeManagementMode;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.RuntimeManagementMode
+- *Default:* Auto
+
+Sets the runtime management configuration for a function's version.
 
 ---
 
