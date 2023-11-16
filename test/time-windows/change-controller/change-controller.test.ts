@@ -80,7 +80,7 @@ describe('Change Controller Tests', () => {
       Description:
         'src/time-windows/change-controller/change-controller.lambda.ts',
       Handler: 'index.handler',
-      Runtime: 'nodejs16.x',
+      Runtime: 'nodejs18.x',
     });
 
     // Only One
@@ -90,7 +90,7 @@ describe('Change Controller Tests', () => {
         Description:
           'src/time-windows/change-controller/change-controller.lambda.ts',
         Handler: 'index.handler',
-        Runtime: 'nodejs16.x',
+        Runtime: 'nodejs18.x',
       },
       1
     );
