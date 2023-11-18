@@ -68,7 +68,7 @@
     "jsii-rosetta": "1.x",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.76.28",
+    "projen": "^0.77.0",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
@@ -79,7 +79,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1498.0"
+    "aws-sdk": "^2.1499.0"
   },
   "bundledDependencies": [
     "aws-sdk"
