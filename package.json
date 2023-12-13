@@ -78,7 +78,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1516.0"
+    "aws-sdk": "^2.1517.0"
   },
   "bundledDependencies": [
     "aws-sdk"
