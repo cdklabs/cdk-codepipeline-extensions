@@ -31,7 +31,6 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-!/.projenrc.js
 /test-reports/
 junit.xml
 /coverage/
@@ -57,3 +56,4 @@ tsconfig.json
 !/src/autorollback/autorollback-function.ts
 !/src/time-windows/calendar/calendar-setup-function.ts
 !/src/time-windows/change-controller/change-controller-function.ts
+!/.projenrc.ts
