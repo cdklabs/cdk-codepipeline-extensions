@@ -53,7 +53,7 @@
     "@typescript-eslint/parser": "^6",
     "aws-cdk-lib": "2.80.0",
     "constructs": "10.0.5",
-    "esbuild": "^0.20.0",
+    "esbuild": "^0.20.1",
     "eslint": "^8",
     "eslint-config-prettier": "^8.10.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -67,7 +67,7 @@
     "jsii-pacmak": "^1.94.0",
     "jsii-rosetta": "1.x",
     "prettier": "^2.8.8",
-    "projen": "^0.79.24",
+    "projen": "^0.79.27",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.2",
@@ -78,7 +78,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1560.0"
+    "aws-sdk": "^2.1561.0"
   },
   "bundledDependencies": [
     "aws-sdk"
