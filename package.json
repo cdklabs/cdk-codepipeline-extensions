@@ -46,7 +46,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.139",
+    "@types/aws-lambda": "^8.10.140",
     "@types/jest": "^27",
     "@types/node": "^16 <= 16.18.78",
     "@typescript-eslint/eslint-plugin": "^7",
@@ -78,7 +78,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1643.0"
+    "aws-sdk": "^2.1644.0"
   },
   "bundledDependencies": [
     "aws-sdk"
