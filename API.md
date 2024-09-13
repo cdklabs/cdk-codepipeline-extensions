@@ -421,14 +421,14 @@ Environment variable options.
 ##### `addLayers` <a name="addLayers" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addLayers"></a>
 
 ```typescript
-public addLayers(layers: ILayerVersion): void
+public addLayers(layers: ...ILayerVersion[]): void
 ```
 
 Adds one or more Lambda Layers to this Lambda function.
 
 ###### `layers`<sup>Required</sup> <a name="layers" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addLayers.parameter.layers"></a>
 
-- *Type:* aws-cdk-lib.aws_lambda.ILayerVersion
+- *Type:* ...aws-cdk-lib.aws_lambda.ILayerVersion[]
 
 the layers to be added.
 
@@ -1578,14 +1578,14 @@ Environment variable options.
 ##### `addLayers` <a name="addLayers" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addLayers"></a>
 
 ```typescript
-public addLayers(layers: ILayerVersion): void
+public addLayers(layers: ...ILayerVersion[]): void
 ```
 
 Adds one or more Lambda Layers to this Lambda function.
 
 ###### `layers`<sup>Required</sup> <a name="layers" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addLayers.parameter.layers"></a>
 
-- *Type:* aws-cdk-lib.aws_lambda.ILayerVersion
+- *Type:* ...aws-cdk-lib.aws_lambda.ILayerVersion[]
 
 the layers to be added.
 
