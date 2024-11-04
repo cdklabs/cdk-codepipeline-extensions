@@ -6,7 +6,7 @@ import {
   PipelineProject,
 } from 'aws-cdk-lib/aws-codebuild';
 import { IRepository } from 'aws-cdk-lib/aws-codecommit';
-import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
+import { Artifact, Pipeline, PipelineType } from 'aws-cdk-lib/aws-codepipeline';
 import {
   CodeBuildAction,
   CodeCommitSourceAction,
@@ -75,6 +75,7 @@ export class PipelineWithChangeControl extends Construct {
     const pipeline = new Pipeline(this, 'Pipeline', {
       pipelineName: props.pipelineName,
       role: props.pipelineRole,
+      pipelineType: PipelineType.V2,
     });
 
     // Source Stage

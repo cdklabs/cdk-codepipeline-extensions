@@ -3,7 +3,7 @@ import { Duration, Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { BuildSpec, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
 import { Repository } from 'aws-cdk-lib/aws-codecommit';
-import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
+import { Artifact, Pipeline, PipelineType } from 'aws-cdk-lib/aws-codepipeline';
 import {
   CodeBuildAction,
   CodeCommitSourceAction,
@@ -21,6 +21,7 @@ describe('Change Controller Tests', () => {
   const stack = new Stack();
   const pipeline = new Pipeline(stack, 'test-pipeline', {
     pipelineName: 'test-pipeline',
+    pipelineType: PipelineType.V2,
   });
 
   const sourceArtifact = new Artifact('Source');
