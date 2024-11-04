@@ -1,85 +1,83 @@
-import {
+import { S3 } from '@aws-sdk/client-s3';
+import { SSM } from '@aws-sdk/client-ssm';
+import { fromTemporaryCredentials } from '@aws-sdk/credential-providers';
+import type {
   OnEventRequest,
   OnEventResponse,
 } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types'; // eslint-disable-line import/no-unresolved
-import { S3, SSM, STS } from 'aws-sdk';
-import { CalendarSourceType } from './calendar';
+import { CalendarSourceType } from './types';
 
 export const handler = async (
   event: OnEventRequest
 ): Promise<OnEventResponse> => {
   console.log('Event: %j', { ...event, ResponseURL: '...' });
 
-  const bucketName = event.ResourceProperties.bucketName;
   const calendarName = event.ResourceProperties.calendarName;
-  const roleArn = event.ResourceProperties.roleArn;
 
-  let calendar: string;
-
-  if (event.ResourceProperties.sourceType === CalendarSourceType.PATH) {
-    calendar = event.ResourceProperties.calendarBody;
-  } else {
-    const s3 = roleArn ? await getSession(roleArn) : new S3();
-    calendar = (
-      await s3
-        .getObject({
-          Bucket: bucketName,
-          Key: calendarName,
-        })
-        .promise()
-    ).Body!.toString();
-  }
-
+  const calendar = await getCalendar(calendarName, event);
   const ssm = new SSM();
-
   if (event.RequestType === 'Create') {
-    const createDocumentRepsonse = await ssm
-      .createDocument({
-        Name: calendarName,
-        Content: calendar,
-        DocumentType: 'ChangeCalendar',
-        DocumentFormat: 'TEXT',
-      })
-      .promise();
-    console.log('Create document: %j', createDocumentRepsonse);
+    const createDocumentResponse = await ssm.createDocument({
+      Name: calendarName,
+      Content: calendar,
+      DocumentType: 'ChangeCalendar',
+      DocumentFormat: 'TEXT',
+    });
+    console.log('Create document: %j', createDocumentResponse);
   }
 
   if (event.RequestType === 'Update') {
-    const updateDocumentResponse = await ssm
-      .updateDocument({
-        Name: calendarName,
-        Content: calendar,
-        DocumentVersion: '$LATEST',
-      })
-      .promise();
+    const updateDocumentResponse = await ssm.updateDocument({
+      Name: calendarName,
+      Content: calendar,
+      DocumentVersion: '$LATEST',
+    });
     console.log('Update document: %j', updateDocumentResponse);
   }
 
   if (event.RequestType === 'Delete') {
-    const deleteDocumentResponse = await ssm
-      .deleteDocument({
-        Name: calendarName,
-      })
-      .promise();
+    const deleteDocumentResponse = await ssm.deleteDocument({
+      Name: calendarName,
+    });
     console.log('Delete document: %j', deleteDocumentResponse);
   }
 
   return {};
 };
 
-const getSession = async (roleArn: string) => {
-  const sts = new STS();
-  const crentials = await sts
-    .assumeRole({
-      RoleArn: roleArn,
-      RoleSessionName: 'Calendar-Setup-Role',
+async function getCalendar(
+  calendarName: string,
+  event: OnEventRequest
+): Promise<string> {
+  const bucketName = event.ResourceProperties.bucketName;
+  const roleArn = event.ResourceProperties.roleArn;
+
+  if (event.ResourceProperties.sourceType === CalendarSourceType.PATH) {
+    return event.ResourceProperties.calendarBody;
+  }
+
+  const s3 = roleArn ? await getSession(roleArn) : new S3();
+  const calendar = await s3
+    .getObject({
+      Bucket: bucketName,
+      Key: calendarName,
     })
-    .promise();
+    .then((r) => r.Body?.transformToString());
+
+  if (!calendar) {
+    throw new Error('Unable to retrieve calendar.');
+  }
+
+  return calendar;
+}
+
+function getSession(roleArn: string): S3 {
   return new S3({
-    credentials: {
-      accessKeyId: crentials.Credentials!.AccessKeyId,
-      secretAccessKey: crentials.Credentials!.SecretAccessKey,
-      sessionToken: crentials.Credentials?.SessionToken,
-    },
+    credentials: fromTemporaryCredentials({
+      params: {
+        RoleArn: roleArn,
+        RoleSessionName: 'Calendar-Setup-Role',
+      },
+    }),
   });
-};
+}

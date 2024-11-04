@@ -63,7 +63,7 @@
       "description": "Create a JavaScript bundle from src/autorollback/autorollback.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\""
         }
       ]
     },
@@ -72,7 +72,7 @@
       "description": "Continuously update the JavaScript bundle from src/autorollback/autorollback.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+          "exec": "esbuild --bundle src/autorollback/autorollback.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/autorollback/autorollback.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --watch"
         }
       ]
     },
@@ -81,7 +81,7 @@
       "description": "Create a JavaScript bundle from src/time-windows/calendar/calendar-setup.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\""
         }
       ]
     },
@@ -90,7 +90,7 @@
       "description": "Continuously update the JavaScript bundle from src/time-windows/calendar/calendar-setup.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+          "exec": "esbuild --bundle src/time-windows/calendar/calendar-setup.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/time-windows/calendar/calendar-setup.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --watch"
         }
       ]
     },
@@ -99,7 +99,7 @@
       "description": "Create a JavaScript bundle from src/time-windows/change-controller/change-controller.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\""
         }
       ]
     },
@@ -108,7 +108,7 @@
       "description": "Continuously update the JavaScript bundle from src/time-windows/change-controller/change-controller.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+          "exec": "esbuild --bundle src/time-windows/change-controller/change-controller.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/time-windows/change-controller/change-controller.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --watch"
         }
       ]
     },
@@ -429,19 +429,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=prod --filter=aws-sdk"
-        },
-        {
-          "exec": "yarn install --check-files"
-        },
-        {
-          "exec": "yarn upgrade aws-sdk"
-        },
-        {
-          "exec": "npx projen"
-        },
-        {
-          "spawn": "post-upgrade"
+          "exec": "echo No dependencies to upgrade."
         }
       ]
     },
@@ -477,13 +465,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev --filter=@types/aws-lambda,@types/jest,esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jest,jsii-diff,jsii-pacmak,jsii-rosetta,prettier,ts-jest,ts-node"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev --filter=@aws-sdk/client-cloudwatch,@aws-sdk/client-codepipeline,@aws-sdk/client-s3,@aws-sdk/client-ssm,@aws-sdk/credential-providers,@types/aws-lambda,@types/jest,esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jest,jsii-diff,jsii-pacmak,jsii-rosetta,prettier,ts-jest,ts-node"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier ts-jest ts-node typescript @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha"
+          "exec": "yarn upgrade @aws-sdk/client-cloudwatch @aws-sdk/client-codepipeline @aws-sdk/client-s3 @aws-sdk/client-ssm @aws-sdk/credential-providers @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier ts-jest ts-node typescript @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha"
         },
         {
           "exec": "npx projen"

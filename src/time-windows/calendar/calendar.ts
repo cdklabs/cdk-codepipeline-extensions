@@ -1,12 +1,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { CustomResource, Arn, Stack } from 'aws-cdk-lib';
 import { IRole, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Function } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { CustomResource, Arn, Stack } from 'aws-cdk-lib/core';
 import { Provider } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 import { CalendarSetupFunction } from './calendar-setup-function';
+import { CalendarSourceType } from './types';
 
 /**
  * Options for creating a calendar object.
@@ -43,21 +44,6 @@ export interface S3LocationOptions extends CalendarLocationOptionsBase {
    * @default - A role created by the Custom Resource.
    */
   readonly role?: IRole;
-}
-
-/**
- * The source types for the calendar file.
- */
-export enum CalendarSourceType {
-  /**
-   * The calendar source is an S3 Bucket.
-   */
-  S3_OBJECT = 's3Object',
-
-  /**
-   * The calendar source is a local path.
-   */
-  PATH = 'path',
 }
 
 /**

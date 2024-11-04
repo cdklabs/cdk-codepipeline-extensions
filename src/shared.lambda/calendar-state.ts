@@ -1,4 +1,4 @@
-import { SSM } from 'aws-sdk';
+import { SSM } from '@aws-sdk/client-ssm';
 
 export type CalendarState = {
   state: string;
@@ -18,9 +18,9 @@ export const getCalendarState = async (
 
   const ssm = new SSM();
   try {
-    const result = await ssm
-      .getCalendarState({ CalendarNames: [calendarName] })
-      .promise();
+    const result = await ssm.getCalendarState({
+      CalendarNames: [calendarName],
+    });
     if (!result.State)
       throw new Error('getCalendarState returned an undefined state.');
     return {

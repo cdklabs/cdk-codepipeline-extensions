@@ -1,38 +1,11 @@
-import { getCalendarState } from './calendar-state';
+import { ChangeControllerEvent } from './types';
+import { getAggregateAlarmState } from '../../shared.lambda/alarm-state';
+import { getCalendarState } from '../../shared.lambda/calendar-state';
 import {
   disableStageTransition,
   enableStageTransition,
   getStageState,
-} from './pipeline-state';
-import { getAggregateAlarmState } from '../../common/alarm-state';
-import { Calendar } from '../calendar/calendar';
-
-/**
- * The event inputs required for the ChangeController lambda function.
- */
-export interface ChangeControllerEvent {
-  /**
-   * The calendar used to determine whether a stage transition should be opened or closed.
-   */
-  readonly calendar: Calendar;
-
-  /**
-   * The terms in alarm descriptions to seach for to determine if alarms should be checked.
-   *
-   * If any of the alarms matching these search terms are in ALARM state, the stage transition will be closed.
-   */
-  readonly searchTerms: string[];
-
-  /**
-   * The name of the pipeline the Change Controller will be added to.
-   */
-  readonly pipelineName: string;
-
-  /**
-   * The name of the stage the Change Controller will be added to.
-   */
-  readonly stageName: string;
-}
+} from '../../shared.lambda/pipeline-state';
 
 export const handler = async (
   event: ChangeControllerEvent,
@@ -48,7 +21,7 @@ export const handler = async (
   const input = {
     pipelineName: pipelineName,
     stageName: stageName,
-    transitionType: 'Inbound',
+    transitionType: 'Inbound' as const,
   };
   if (calendarState.state === 'OPEN' && alarmState.state === 'OK') {
     console.log(`Enabling transition: ${JSON.stringify(input, null, 2)}`);

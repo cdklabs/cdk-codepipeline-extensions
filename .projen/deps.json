@@ -1,6 +1,26 @@
 {
   "dependencies": [
     {
+      "name": "@aws-sdk/client-cloudwatch",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-codepipeline",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-ssm",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/credential-providers",
+      "type": "build"
+    },
+    {
       "name": "@types/aws-lambda",
       "type": "build"
     },
@@ -108,10 +128,6 @@
       "name": "typescript",
       "version": "5.5.x",
       "type": "build"
-    },
-    {
-      "name": "aws-sdk",
-      "type": "bundled"
     },
     {
       "name": "@aws-cdk/integ-runner",
