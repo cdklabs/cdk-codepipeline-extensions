@@ -38,8 +38,6 @@ junit.xml
 /dist/changelog.md
 /dist/version.txt
 !/.github/workflows/release.yml
-!/.mergify.yml
-!/.github/workflows/upgrade-main.yml
 !/.github/pull_request_template.md
 !/.prettierignore
 !/.prettierrc.json
@@ -56,4 +54,10 @@ tsconfig.json
 !/src/autorollback/autorollback-function.ts
 !/src/time-windows/calendar/calendar-setup-function.ts
 !/src/time-windows/change-controller/change-controller-function.ts
+.jsii.tabl.json
+!/rosetta/default.ts-fixture
+!/.github/workflows/auto-queue.yml
+!/.github/workflows/upgrade-cdklabs-projen-project-types-main.yml
+!/.github/workflows/upgrade-main.yml
+!/.github/workflows/upgrade-dev-deps-main.yml
 !/.projenrc.ts

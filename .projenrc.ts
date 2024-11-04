@@ -1,20 +1,32 @@
-import { awscdk, javascript } from 'projen';
-import { Stability } from 'projen/lib/cdk';
-const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'Kendra Neil',
-  authorAddress: 'kneil@amazon.com',
-  cdkVersion: '2.80.0',
-  defaultReleaseBranch: 'main',
+import { CdklabsConstructLibrary } from 'cdklabs-projen-project-types';
+import { cdk } from 'projen';
+
+const project = new CdklabsConstructLibrary({
   name: '@cdklabs/cdk-codepipeline-extensions',
-  projenrcTs: true,
+  description:
+    'This project is for use in the workshop DOP 402: Get better at building AWS CDK constructs',
+  author: 'Amazon Web Services',
+  authorAddress: 'aws-cdk-dev@amazon.com',
   repositoryUrl: 'https://github.com/cdklabs/cdk-codepipeline-extensions.git',
-  autoApproveUpgrades: true,
-  autoApproveOptions: {
-    allowedUsernames: ['cdklabs-automation'],
-    secret: 'GITHUB_TOKEN',
-  },
-  stability: Stability.EXPERIMENTAL,
-  npmAccess: javascript.NpmAccess.PUBLIC,
+  projenrcTs: true,
+  defaultReleaseBranch: 'main',
+  enablePRAutoMerge: true,
+
+  // Deps
+  cdkVersion: '2.128.0', // needed for Pipeline.pipelineType
+  jsiiVersion: '5.5.x',
+  typescriptVersion: '5.5.x',
+  deps: [],
+  devDeps: ['@types/aws-lambda', 'jsii-rosetta@5.5.x'],
+  bundledDeps: ['aws-sdk'],
+  prettier: true,
+
+  // npm settings
+  private: false,
+  stability: cdk.Stability.EXPERIMENTAL,
+  setNodeEngineVersion: false,
+
+  // package names
   publishToGo: {
     moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions-go',
   },
@@ -32,28 +44,20 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'cdklabs.codepipeline-extensions',
     module: 'cdk.codepipeline_extensions',
   },
-  docgen: true,
-  deps: [],
-  description:
-    'This project is for use in the workshop DOP 401: Get better at building AWS CDK constructs.',
-  devDeps: ['@types/aws-lambda'],
-  bundledDeps: ['aws-sdk'],
-  prettier: true,
 });
 
+// Prettier config
 project.package.addField('prettier', {
   singleQuote: true,
   semi: true,
   trailingComma: 'es5',
 });
-
 project.eslint?.addRules({
   'prettier/prettier': [
     'error',
     { singleQuote: true, semi: true, trailingComma: 'es5' },
   ],
 });
-
 project.eslint?.addOverride({
   files: ['*-function.ts'],
   rules: { 'prettier/prettier': 'off' },
