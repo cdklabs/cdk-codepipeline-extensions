@@ -1,5 +1,5 @@
 import { CdklabsConstructLibrary } from 'cdklabs-projen-project-types';
-import { cdk, javascript } from 'projen';
+import { cdk } from 'projen';
 
 const project = new CdklabsConstructLibrary({
   name: '@cdklabs/cdk-codepipeline-extensions',
@@ -8,28 +8,25 @@ const project = new CdklabsConstructLibrary({
   author: 'Amazon Web Services',
   authorAddress: 'aws-cdk-dev@amazon.com',
   repositoryUrl: 'https://github.com/cdklabs/cdk-codepipeline-extensions.git',
-  private: false,
-
-  defaultReleaseBranch: 'main',
   projenrcTs: true,
-  cdkVersion: '2.128.0', // needed for Pipeline.pipelineType
-
+  defaultReleaseBranch: 'main',
   enablePRAutoMerge: true,
-  autoApproveUpgrades: true,
-  autoApproveOptions: {
-    allowedUsernames: ['cdklabs-automation'],
-    secret: 'GITHUB_TOKEN',
-  },
 
+  // Deps
+  cdkVersion: '2.128.0', // needed for Pipeline.pipelineType
+  jsiiVersion: '5.5.x',
+  typescriptVersion: '5.5.x',
   deps: [],
-  devDeps: ['@types/aws-lambda'],
+  devDeps: ['@types/aws-lambda', 'jsii-rosetta@5.5.x'],
   bundledDeps: ['aws-sdk'],
   prettier: true,
 
+  // npm settings
+  private: false,
   stability: cdk.Stability.EXPERIMENTAL,
-  npmAccess: javascript.NpmAccess.PUBLIC,
   setNodeEngineVersion: false,
 
+  // package names
   publishToGo: {
     moduleName: 'github.com/cdklabs/cdk-codepipeline-extensions-go',
   },
@@ -49,19 +46,18 @@ const project = new CdklabsConstructLibrary({
   },
 });
 
+// Prettier config
 project.package.addField('prettier', {
   singleQuote: true,
   semi: true,
   trailingComma: 'es5',
 });
-
 project.eslint?.addRules({
   'prettier/prettier': [
     'error',
     { singleQuote: true, semi: true, trailingComma: 'es5' },
   ],
 });
-
 project.eslint?.addOverride({
   files: ['*-function.ts'],
   rules: { 'prettier/prettier': 'off' },
