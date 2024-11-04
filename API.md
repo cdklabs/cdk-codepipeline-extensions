@@ -54,6 +54,7 @@ new CalendarSetupFunction(scope: Construct, id: string, props?: CalendarSetupFun
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.configureAsyncInvoke">configureAsyncInvoke</a></code> | Configures options for asynchronous invocation. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.considerWarningOnInvokeFunctionPermissions">considerWarningOnInvokeFunctionPermissions</a></code> | A warning will be added to functions under the following conditions: - permissions that include `lambda:InvokeFunction` are added to the unqualified function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.grantInvoke">grantInvoke</a></code> | Grant the given identity permissions to invoke this Lambda. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.grantInvokeCompositePrincipal">grantInvokeCompositePrincipal</a></code> | Grant multiple principals the ability to invoke this Lambda via CompositePrincipal. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.grantInvokeUrl">grantInvokeUrl</a></code> | Grant the given identity permissions to invoke this Lambda Function URL. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.metric">metric</a></code> | Return the given named metric for this Function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.metricDuration">metricDuration</a></code> | How long execution of this Lambda takes. |
@@ -105,11 +106,11 @@ public addEventSource(source: IEventSource): void
 
 Adds an event source to this function.
 
-Event sources are implemented in the @aws-cdk/aws-lambda-event-sources module.
+Event sources are implemented in the aws-cdk-lib/aws-lambda-event-sources module.
 
 The following example adds an SQS Queue as an event source:
 ```
-import { SqsEventSource } from '@aws-cdk/aws-lambda-event-sources';
+import { SqsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
 myFunction.addEventSource(new SqsEventSource(myQueue));
 ```
 
@@ -243,6 +244,20 @@ Grant the given identity permissions to invoke this Lambda.
 ###### `grantee`<sup>Required</sup> <a name="grantee" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.grantInvoke.parameter.grantee"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `grantInvokeCompositePrincipal` <a name="grantInvokeCompositePrincipal" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.grantInvokeCompositePrincipal"></a>
+
+```typescript
+public grantInvokeCompositePrincipal(compositePrincipal: CompositePrincipal): Grant[]
+```
+
+Grant multiple principals the ability to invoke this Lambda via CompositePrincipal.
+
+###### `compositePrincipal`<sup>Required</sup> <a name="compositePrincipal" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.grantInvokeCompositePrincipal.parameter.compositePrincipal"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.CompositePrincipal
 
 ---
 
@@ -572,6 +587,9 @@ CalendarSetupFunction.fromFunctionArn(scope: Construct, id: string, functionArn:
 
 Import a lambda function into the CDK using its ARN.
 
+For `Function.addPermissions()` to work on this imported lambda, make sure that is
+in the same account and region as the stack you are importing it into.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.fromFunctionArn.parameter.scope"></a>
 
 - *Type:* constructs.Construct
@@ -599,6 +617,9 @@ CalendarSetupFunction.fromFunctionAttributes(scope: Construct, id: string, attrs
 ```
 
 Creates a Lambda function object which represents a function not defined within this stack.
+
+For `Function.addPermissions()` to work on this imported lambda, set the sameEnvironment property to true
+if this imported lambda is in the same account and region as the stack you are importing it into.
 
 ###### `scope`<sup>Required</sup> <a name="scope" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.fromFunctionAttributes.parameter.scope"></a>
 
@@ -1211,6 +1232,7 @@ new ChangeControllerFunction(scope: Construct, id: string, props?: ChangeControl
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.configureAsyncInvoke">configureAsyncInvoke</a></code> | Configures options for asynchronous invocation. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.considerWarningOnInvokeFunctionPermissions">considerWarningOnInvokeFunctionPermissions</a></code> | A warning will be added to functions under the following conditions: - permissions that include `lambda:InvokeFunction` are added to the unqualified function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.grantInvoke">grantInvoke</a></code> | Grant the given identity permissions to invoke this Lambda. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.grantInvokeCompositePrincipal">grantInvokeCompositePrincipal</a></code> | Grant multiple principals the ability to invoke this Lambda via CompositePrincipal. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.grantInvokeUrl">grantInvokeUrl</a></code> | Grant the given identity permissions to invoke this Lambda Function URL. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.metric">metric</a></code> | Return the given named metric for this Function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.metricDuration">metricDuration</a></code> | How long execution of this Lambda takes. |
@@ -1262,11 +1284,11 @@ public addEventSource(source: IEventSource): void
 
 Adds an event source to this function.
 
-Event sources are implemented in the @aws-cdk/aws-lambda-event-sources module.
+Event sources are implemented in the aws-cdk-lib/aws-lambda-event-sources module.
 
 The following example adds an SQS Queue as an event source:
 ```
-import { SqsEventSource } from '@aws-cdk/aws-lambda-event-sources';
+import { SqsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
 myFunction.addEventSource(new SqsEventSource(myQueue));
 ```
 
@@ -1400,6 +1422,20 @@ Grant the given identity permissions to invoke this Lambda.
 ###### `grantee`<sup>Required</sup> <a name="grantee" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.grantInvoke.parameter.grantee"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `grantInvokeCompositePrincipal` <a name="grantInvokeCompositePrincipal" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.grantInvokeCompositePrincipal"></a>
+
+```typescript
+public grantInvokeCompositePrincipal(compositePrincipal: CompositePrincipal): Grant[]
+```
+
+Grant multiple principals the ability to invoke this Lambda via CompositePrincipal.
+
+###### `compositePrincipal`<sup>Required</sup> <a name="compositePrincipal" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.grantInvokeCompositePrincipal.parameter.compositePrincipal"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.CompositePrincipal
 
 ---
 
@@ -1729,6 +1765,9 @@ ChangeControllerFunction.fromFunctionArn(scope: Construct, id: string, functionA
 
 Import a lambda function into the CDK using its ARN.
 
+For `Function.addPermissions()` to work on this imported lambda, make sure that is
+in the same account and region as the stack you are importing it into.
+
 ###### `scope`<sup>Required</sup> <a name="scope" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.fromFunctionArn.parameter.scope"></a>
 
 - *Type:* constructs.Construct
@@ -1756,6 +1795,9 @@ ChangeControllerFunction.fromFunctionAttributes(scope: Construct, id: string, at
 ```
 
 Creates a Lambda function object which represents a function not defined within this stack.
+
+For `Function.addPermissions()` to work on this imported lambda, set the sameEnvironment property to true
+if this imported lambda is in the same account and region as the stack you are importing it into.
 
 ###### `scope`<sup>Required</sup> <a name="scope" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.fromFunctionAttributes.parameter.scope"></a>
 
@@ -2418,6 +2460,7 @@ const calendarSetupFunctionProps: CalendarSetupFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.adotInstrumentation">adotInstrumentation</a></code> | <code>aws-cdk-lib.aws_lambda.AdotInstrumentationConfig</code> | Specify the configuration of AWS Distro for OpenTelemetry (ADOT) instrumentation. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.allowAllOutbound">allowAllOutbound</a></code> | <code>boolean</code> | Whether to allow the Lambda to send all network traffic. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.allowPublicSubnet">allowPublicSubnet</a></code> | <code>boolean</code> | Lambda Functions in a public subnet can NOT access the internet. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.applicationLogLevel">applicationLogLevel</a></code> | <code>string</code> | Sets the application log level for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.architecture">architecture</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture</code> | The system architectures compatible with this lambda function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.codeSigningConfig">codeSigningConfig</a></code> | <code>aws-cdk-lib.aws_lambda.ICodeSigningConfig</code> | Code signing config associated with this function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.currentVersionOptions">currentVersionOptions</a></code> | <code>aws-cdk-lib.aws_lambda.VersionOptions</code> | Options for the `lambda.Version` resource automatically created by the `fn.currentVersion` method. |
@@ -2434,16 +2477,22 @@ const calendarSetupFunctionProps: CalendarSetupFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.initialPolicy">initialPolicy</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Initial policy statements to add to the created Lambda Role. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.loggingFormat">loggingFormat</a></code> | <code>aws-cdk-lib.aws_lambda.LoggingFormat</code> | Sets the loggingFormat for the function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | The log group the function sends logs to. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | The number of days log events are kept in CloudWatch Logs. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logRetentionRetryOptions">logRetentionRetryOptions</a></code> | <code>aws-cdk-lib.aws_lambda.LogRetentionRetryOptions</code> | When log retention is specified, a custom resource attempts to create the CloudWatch log group. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logRetentionRole">logRetentionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The IAM role for the Lambda function associated with the custom resource that sets the retention policy. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.memorySize">memorySize</a></code> | <code>number</code> | The amount of memory, in MB, that is allocated to your Lambda function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.paramsAndSecrets">paramsAndSecrets</a></code> | <code>aws-cdk-lib.aws_lambda.ParamsAndSecretsLayerVersion</code> | Specify the configuration of Parameters and Secrets Extension. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.profiling">profiling</a></code> | <code>boolean</code> | Enable profiling. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.profilingGroup">profilingGroup</a></code> | <code>aws-cdk-lib.aws_codeguruprofiler.IProfilingGroup</code> | Profiling Group. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.reservedConcurrentExecutions">reservedConcurrentExecutions</a></code> | <code>number</code> | The maximum of concurrent executions you want to reserve for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Lambda execution role. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.runtimeManagementMode">runtimeManagementMode</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeManagementMode</code> | Sets the runtime management configuration for a function's version. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.securityGroups">securityGroups</a></code> | <code>aws-cdk-lib.aws_ec2.ISecurityGroup[]</code> | The list of security groups to associate with the Lambda's network interfaces. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.snapStart">snapStart</a></code> | <code>aws-cdk-lib.aws_lambda.SnapStartConf</code> | Enable SnapStart for Lambda Function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.systemLogLevel">systemLogLevel</a></code> | <code>string</code> | Sets the system log level for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.timeout">timeout</a></code> | <code>aws-cdk-lib.Duration</code> | The function execution time (in seconds) after which Lambda terminates the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.tracing">tracing</a></code> | <code>aws-cdk-lib.aws_lambda.Tracing</code> | Enable AWS X-Ray Tracing for Lambda Function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC network to place Lambda network interfaces. |
@@ -2538,6 +2587,9 @@ Whether to allow the Lambda to send all network traffic.
 If set to false, you must individually add traffic rules to allow the
 Lambda to connect to network targets.
 
+Do not specify this property if the `securityGroups` or `securityGroup` property is set.
+Instead, configure `allowAllOutbound` directly on the security group.
+
 ---
 
 ##### `allowPublicSubnet`<sup>Optional</sup> <a name="allowPublicSubnet" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.allowPublicSubnet"></a>
@@ -2554,6 +2606,19 @@ Lambda Functions in a public subnet can NOT access the internet.
 Use this property to acknowledge this limitation and still place the function in a public subnet.
 
 > [https://stackoverflow.com/questions/52992085/why-cant-an-aws-lambda-function-inside-a-public-subnet-in-a-vpc-connect-to-the/52994841#52994841](https://stackoverflow.com/questions/52992085/why-cant-an-aws-lambda-function-inside-a-public-subnet-in-a-vpc-connect-to-the/52994841#52994841)
+
+---
+
+##### `applicationLogLevel`<sup>Optional</sup> <a name="applicationLogLevel" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.applicationLogLevel"></a>
+
+```typescript
+public readonly applicationLogLevel: string;
+```
+
+- *Type:* string
+- *Default:* "INFO"
+
+Sets the application log level for the function.
 
 ---
 
@@ -2787,6 +2852,53 @@ that can be used by multiple functions.
 
 ---
 
+##### `logFormat`<sup>Optional</sup> <a name="logFormat" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logFormat"></a>
+
+```typescript
+public readonly logFormat: string;
+```
+
+- *Type:* string
+- *Default:* "Text"
+
+Sets the logFormat for the function.
+
+---
+
+##### `loggingFormat`<sup>Optional</sup> <a name="loggingFormat" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.loggingFormat"></a>
+
+```typescript
+public readonly loggingFormat: LoggingFormat;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.LoggingFormat
+- *Default:* LoggingFormat.TEXT
+
+Sets the loggingFormat for the function.
+
+---
+
+##### `logGroup`<sup>Optional</sup> <a name="logGroup" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logGroup"></a>
+
+```typescript
+public readonly logGroup: ILogGroup;
+```
+
+- *Type:* aws-cdk-lib.aws_logs.ILogGroup
+- *Default:* `/aws/lambda/${this.functionName}` - default log group created by Lambda
+
+The log group the function sends logs to.
+
+By default, Lambda functions send logs to an automatically created default log group named /aws/lambda/\<function name\>.
+However you cannot change the properties of this auto-created log group using the AWS CDK, e.g. you cannot set a different log retention.
+
+Use the `logGroup` property to create a fully customizable LogGroup ahead of time, and instruct the Lambda function to send logs to it.
+
+Providing a user-controlled log group was rolled out to commercial regions on 2023-11-16.
+If you are deploying to another type of region, please check regional availability first.
+
+---
+
 ##### `logRetention`<sup>Optional</sup> <a name="logRetention" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logRetention"></a>
 
 ```typescript
@@ -2801,6 +2913,20 @@ The number of days log events are kept in CloudWatch Logs.
 When updating
 this property, unsetting it doesn't remove the log retention policy. To
 remove the retention policy, set the value to `INFINITE`.
+
+This is a legacy API and we strongly recommend you move away from it if you can.
+Instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property
+to instruct the Lambda function to send logs to it.
+Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
+Users and code and referencing the name verbatim will have to adjust.
+
+In AWS CDK code, you can access the log group name directly from the LogGroup construct:
+```ts
+import * as logs from 'aws-cdk-lib/aws-logs';
+
+declare const myLogGroup: logs.LogGroup;
+myLogGroup.logGroupName;
+```
 
 ---
 
@@ -2817,6 +2943,9 @@ When log retention is specified, a custom resource attempts to create the CloudW
 
 These options control the retry policy when interacting with CloudWatch APIs.
 
+This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
+`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
+
 ---
 
 ##### `logRetentionRole`<sup>Optional</sup> <a name="logRetentionRole" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.logRetentionRole"></a>
@@ -2829,6 +2958,9 @@ public readonly logRetentionRole: IRole;
 - *Default:* A new role is created.
 
 The IAM role for the Lambda function associated with the custom resource that sets the retention policy.
+
+This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
+`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ---
 
@@ -2846,6 +2978,21 @@ The amount of memory, in MB, that is allocated to your Lambda function.
 Lambda uses this value to proportionally allocate the amount of CPU
 power. For more information, see Resource Model in the AWS Lambda
 Developer Guide.
+
+---
+
+##### `paramsAndSecrets`<sup>Optional</sup> <a name="paramsAndSecrets" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.paramsAndSecrets"></a>
+
+```typescript
+public readonly paramsAndSecrets: ParamsAndSecretsLayerVersion;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.ParamsAndSecretsLayerVersion
+- *Default:* No Parameters and Secrets Extension
+
+Specify the configuration of Parameters and Secrets Extension.
+
+> [https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html)
 
 ---
 
@@ -2942,6 +3089,34 @@ public readonly securityGroups: ISecurityGroup[];
 The list of security groups to associate with the Lambda's network interfaces.
 
 Only used if 'vpc' is supplied.
+
+---
+
+##### `snapStart`<sup>Optional</sup> <a name="snapStart" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.snapStart"></a>
+
+```typescript
+public readonly snapStart: SnapStartConf;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.SnapStartConf
+- *Default:* No snapstart
+
+Enable SnapStart for Lambda Function.
+
+SnapStart is currently supported only for Java 11, 17 runtime
+
+---
+
+##### `systemLogLevel`<sup>Optional</sup> <a name="systemLogLevel" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunctionProps.property.systemLogLevel"></a>
+
+```typescript
+public readonly systemLogLevel: string;
+```
+
+- *Type:* string
+- *Default:* "INFO"
+
+Sets the system log level for the function.
 
 ---
 
@@ -3105,6 +3280,7 @@ const changeControllerFunctionProps: ChangeControllerFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.adotInstrumentation">adotInstrumentation</a></code> | <code>aws-cdk-lib.aws_lambda.AdotInstrumentationConfig</code> | Specify the configuration of AWS Distro for OpenTelemetry (ADOT) instrumentation. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.allowAllOutbound">allowAllOutbound</a></code> | <code>boolean</code> | Whether to allow the Lambda to send all network traffic. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.allowPublicSubnet">allowPublicSubnet</a></code> | <code>boolean</code> | Lambda Functions in a public subnet can NOT access the internet. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.applicationLogLevel">applicationLogLevel</a></code> | <code>string</code> | Sets the application log level for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.architecture">architecture</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture</code> | The system architectures compatible with this lambda function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.codeSigningConfig">codeSigningConfig</a></code> | <code>aws-cdk-lib.aws_lambda.ICodeSigningConfig</code> | Code signing config associated with this function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.currentVersionOptions">currentVersionOptions</a></code> | <code>aws-cdk-lib.aws_lambda.VersionOptions</code> | Options for the `lambda.Version` resource automatically created by the `fn.currentVersion` method. |
@@ -3121,16 +3297,22 @@ const changeControllerFunctionProps: ChangeControllerFunctionProps = { ... }
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.initialPolicy">initialPolicy</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Initial policy statements to add to the created Lambda Role. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.loggingFormat">loggingFormat</a></code> | <code>aws-cdk-lib.aws_lambda.LoggingFormat</code> | Sets the loggingFormat for the function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | The log group the function sends logs to. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | The number of days log events are kept in CloudWatch Logs. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logRetentionRetryOptions">logRetentionRetryOptions</a></code> | <code>aws-cdk-lib.aws_lambda.LogRetentionRetryOptions</code> | When log retention is specified, a custom resource attempts to create the CloudWatch log group. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logRetentionRole">logRetentionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The IAM role for the Lambda function associated with the custom resource that sets the retention policy. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.memorySize">memorySize</a></code> | <code>number</code> | The amount of memory, in MB, that is allocated to your Lambda function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.paramsAndSecrets">paramsAndSecrets</a></code> | <code>aws-cdk-lib.aws_lambda.ParamsAndSecretsLayerVersion</code> | Specify the configuration of Parameters and Secrets Extension. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.profiling">profiling</a></code> | <code>boolean</code> | Enable profiling. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.profilingGroup">profilingGroup</a></code> | <code>aws-cdk-lib.aws_codeguruprofiler.IProfilingGroup</code> | Profiling Group. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.reservedConcurrentExecutions">reservedConcurrentExecutions</a></code> | <code>number</code> | The maximum of concurrent executions you want to reserve for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | Lambda execution role. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.runtimeManagementMode">runtimeManagementMode</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeManagementMode</code> | Sets the runtime management configuration for a function's version. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.securityGroups">securityGroups</a></code> | <code>aws-cdk-lib.aws_ec2.ISecurityGroup[]</code> | The list of security groups to associate with the Lambda's network interfaces. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.snapStart">snapStart</a></code> | <code>aws-cdk-lib.aws_lambda.SnapStartConf</code> | Enable SnapStart for Lambda Function. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.systemLogLevel">systemLogLevel</a></code> | <code>string</code> | Sets the system log level for the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.timeout">timeout</a></code> | <code>aws-cdk-lib.Duration</code> | The function execution time (in seconds) after which Lambda terminates the function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.tracing">tracing</a></code> | <code>aws-cdk-lib.aws_lambda.Tracing</code> | Enable AWS X-Ray Tracing for Lambda Function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | VPC network to place Lambda network interfaces. |
@@ -3225,6 +3407,9 @@ Whether to allow the Lambda to send all network traffic.
 If set to false, you must individually add traffic rules to allow the
 Lambda to connect to network targets.
 
+Do not specify this property if the `securityGroups` or `securityGroup` property is set.
+Instead, configure `allowAllOutbound` directly on the security group.
+
 ---
 
 ##### `allowPublicSubnet`<sup>Optional</sup> <a name="allowPublicSubnet" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.allowPublicSubnet"></a>
@@ -3241,6 +3426,19 @@ Lambda Functions in a public subnet can NOT access the internet.
 Use this property to acknowledge this limitation and still place the function in a public subnet.
 
 > [https://stackoverflow.com/questions/52992085/why-cant-an-aws-lambda-function-inside-a-public-subnet-in-a-vpc-connect-to-the/52994841#52994841](https://stackoverflow.com/questions/52992085/why-cant-an-aws-lambda-function-inside-a-public-subnet-in-a-vpc-connect-to-the/52994841#52994841)
+
+---
+
+##### `applicationLogLevel`<sup>Optional</sup> <a name="applicationLogLevel" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.applicationLogLevel"></a>
+
+```typescript
+public readonly applicationLogLevel: string;
+```
+
+- *Type:* string
+- *Default:* "INFO"
+
+Sets the application log level for the function.
 
 ---
 
@@ -3474,6 +3672,53 @@ that can be used by multiple functions.
 
 ---
 
+##### `logFormat`<sup>Optional</sup> <a name="logFormat" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logFormat"></a>
+
+```typescript
+public readonly logFormat: string;
+```
+
+- *Type:* string
+- *Default:* "Text"
+
+Sets the logFormat for the function.
+
+---
+
+##### `loggingFormat`<sup>Optional</sup> <a name="loggingFormat" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.loggingFormat"></a>
+
+```typescript
+public readonly loggingFormat: LoggingFormat;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.LoggingFormat
+- *Default:* LoggingFormat.TEXT
+
+Sets the loggingFormat for the function.
+
+---
+
+##### `logGroup`<sup>Optional</sup> <a name="logGroup" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logGroup"></a>
+
+```typescript
+public readonly logGroup: ILogGroup;
+```
+
+- *Type:* aws-cdk-lib.aws_logs.ILogGroup
+- *Default:* `/aws/lambda/${this.functionName}` - default log group created by Lambda
+
+The log group the function sends logs to.
+
+By default, Lambda functions send logs to an automatically created default log group named /aws/lambda/\<function name\>.
+However you cannot change the properties of this auto-created log group using the AWS CDK, e.g. you cannot set a different log retention.
+
+Use the `logGroup` property to create a fully customizable LogGroup ahead of time, and instruct the Lambda function to send logs to it.
+
+Providing a user-controlled log group was rolled out to commercial regions on 2023-11-16.
+If you are deploying to another type of region, please check regional availability first.
+
+---
+
 ##### `logRetention`<sup>Optional</sup> <a name="logRetention" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logRetention"></a>
 
 ```typescript
@@ -3488,6 +3733,20 @@ The number of days log events are kept in CloudWatch Logs.
 When updating
 this property, unsetting it doesn't remove the log retention policy. To
 remove the retention policy, set the value to `INFINITE`.
+
+This is a legacy API and we strongly recommend you move away from it if you can.
+Instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property
+to instruct the Lambda function to send logs to it.
+Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
+Users and code and referencing the name verbatim will have to adjust.
+
+In AWS CDK code, you can access the log group name directly from the LogGroup construct:
+```ts
+import * as logs from 'aws-cdk-lib/aws-logs';
+
+declare const myLogGroup: logs.LogGroup;
+myLogGroup.logGroupName;
+```
 
 ---
 
@@ -3504,6 +3763,9 @@ When log retention is specified, a custom resource attempts to create the CloudW
 
 These options control the retry policy when interacting with CloudWatch APIs.
 
+This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
+`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
+
 ---
 
 ##### `logRetentionRole`<sup>Optional</sup> <a name="logRetentionRole" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.logRetentionRole"></a>
@@ -3516,6 +3778,9 @@ public readonly logRetentionRole: IRole;
 - *Default:* A new role is created.
 
 The IAM role for the Lambda function associated with the custom resource that sets the retention policy.
+
+This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
+`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ---
 
@@ -3533,6 +3798,21 @@ The amount of memory, in MB, that is allocated to your Lambda function.
 Lambda uses this value to proportionally allocate the amount of CPU
 power. For more information, see Resource Model in the AWS Lambda
 Developer Guide.
+
+---
+
+##### `paramsAndSecrets`<sup>Optional</sup> <a name="paramsAndSecrets" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.paramsAndSecrets"></a>
+
+```typescript
+public readonly paramsAndSecrets: ParamsAndSecretsLayerVersion;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.ParamsAndSecretsLayerVersion
+- *Default:* No Parameters and Secrets Extension
+
+Specify the configuration of Parameters and Secrets Extension.
+
+> [https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html)
 
 ---
 
@@ -3629,6 +3909,34 @@ public readonly securityGroups: ISecurityGroup[];
 The list of security groups to associate with the Lambda's network interfaces.
 
 Only used if 'vpc' is supplied.
+
+---
+
+##### `snapStart`<sup>Optional</sup> <a name="snapStart" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.snapStart"></a>
+
+```typescript
+public readonly snapStart: SnapStartConf;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.SnapStartConf
+- *Default:* No snapstart
+
+Enable SnapStart for Lambda Function.
+
+SnapStart is currently supported only for Java 11, 17 runtime
+
+---
+
+##### `systemLogLevel`<sup>Optional</sup> <a name="systemLogLevel" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunctionProps.property.systemLogLevel"></a>
+
+```typescript
+public readonly systemLogLevel: string;
+```
+
+- *Type:* string
+- *Default:* "INFO"
+
+Sets the system log level for the function.
 
 ---
 
