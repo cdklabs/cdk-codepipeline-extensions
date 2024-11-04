@@ -1,8 +1,8 @@
-import { CloudWatch } from 'aws-sdk';
-import {
+import { CloudWatch } from '@aws-sdk/client-cloudwatch';
+import type {
   DescribeAlarmsInput,
   DescribeAlarmsOutput,
-} from 'aws-sdk/clients/cloudwatch';
+} from '@aws-sdk/client-cloudwatch';
 
 export enum AlarmState {
   OK = 'OK',
@@ -39,13 +39,11 @@ export const getCloudwatchAlarms = async (
   let results: IAlarmDetail[] = [];
 
   do {
-    const result: DescribeAlarmsOutput = await cloudwatch
-      .describeAlarms({
-        AlarmTypes: ['CompositeAlarm', 'MetricAlarm'],
-        ...params,
-        NextToken: nextToken,
-      })
-      .promise();
+    const result: DescribeAlarmsOutput = await cloudwatch.describeAlarms({
+      AlarmTypes: ['CompositeAlarm', 'MetricAlarm'],
+      ...params,
+      NextToken: nextToken,
+    });
 
     results = result.CompositeAlarms
       ? results.concat(

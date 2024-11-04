@@ -1,5 +1,5 @@
 import { CdklabsConstructLibrary } from 'cdklabs-projen-project-types';
-import { cdk } from 'projen';
+import { awscdk, cdk } from 'projen';
 
 const project = new CdklabsConstructLibrary({
   name: '@cdklabs/cdk-codepipeline-extensions',
@@ -17,9 +17,25 @@ const project = new CdklabsConstructLibrary({
   jsiiVersion: '5.5.x',
   typescriptVersion: '5.5.x',
   deps: [],
-  devDeps: ['@types/aws-lambda', 'jsii-rosetta@5.5.x'],
-  bundledDeps: ['aws-sdk'],
+  devDeps: [
+    '@types/aws-lambda',
+    '@aws-sdk/client-codepipeline',
+    '@aws-sdk/client-cloudwatch',
+    '@aws-sdk/client-s3',
+    '@aws-sdk/client-ssm',
+    '@aws-sdk/credential-providers',
+    'jsii-rosetta@5.5.x',
+  ],
   prettier: true,
+
+  // lambda settings for SDKv3
+  lambdaOptions: {
+    awsSdkConnectionReuse: false,
+    runtime: awscdk.LambdaRuntime.NODEJS_20_X,
+    bundlingOptions: {
+      externals: [],
+    },
+  },
 
   // npm settings
   private: false,
@@ -58,6 +74,7 @@ project.eslint?.addRules({
     { singleQuote: true, semi: true, trailingComma: 'es5' },
   ],
 });
+project.eslint?.allowDevDeps('src/**/shared.lambda/**/*.ts');
 project.eslint?.addOverride({
   files: ['*-function.ts'],
   rules: { 'prettier/prettier': 'off' },

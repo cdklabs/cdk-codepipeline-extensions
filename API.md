@@ -2355,56 +2355,6 @@ The tree node.
 
 ## Structs <a name="Structs" id="Structs"></a>
 
-### AggregateAlarmState <a name="AggregateAlarmState" id="@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState"></a>
-
-#### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.Initializer"></a>
-
-```typescript
-import { AggregateAlarmState } from '@cdklabs/cdk-codepipeline-extensions'
-
-const aggregateAlarmState: AggregateAlarmState = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.property.alarmDetails">alarmDetails</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail">IAlarmDetail</a>[]</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.property.state">state</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.AlarmState">AlarmState</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.property.summary">summary</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `alarmDetails`<sup>Required</sup> <a name="alarmDetails" id="@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.property.alarmDetails"></a>
-
-```typescript
-public readonly alarmDetails: IAlarmDetail[];
-```
-
-- *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail">IAlarmDetail</a>[]
-
----
-
-##### `state`<sup>Required</sup> <a name="state" id="@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.property.state"></a>
-
-```typescript
-public readonly state: AlarmState;
-```
-
-- *Type:* <a href="#@cdklabs/cdk-codepipeline-extensions.AlarmState">AlarmState</a>
-
----
-
-##### `summary`<sup>Required</sup> <a name="summary" id="@cdklabs/cdk-codepipeline-extensions.AggregateAlarmState.property.summary"></a>
-
-```typescript
-public readonly summary: string;
-```
-
-- *Type:* string
-
----
-
 ### CalendarLocationOptionsBase <a name="CalendarLocationOptionsBase" id="@cdklabs/cdk-codepipeline-extensions.CalendarLocationOptionsBase"></a>
 
 Options for creating a calendar object.
@@ -3202,7 +3152,7 @@ const changeControllerEvent: ChangeControllerEvent = { ... }
 | --- | --- | --- |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.calendar">calendar</a></code> | <code><a href="#@cdklabs/cdk-codepipeline-extensions.Calendar">Calendar</a></code> | The calendar used to determine whether a stage transition should be opened or closed. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.pipelineName">pipelineName</a></code> | <code>string</code> | The name of the pipeline the Change Controller will be added to. |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | The terms in alarm descriptions to seach for to determine if alarms should be checked. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | The terms in alarm descriptions to search for to determine if alarms should be checked. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerEvent.property.stageName">stageName</a></code> | <code>string</code> | The name of the stage the Change Controller will be added to. |
 
 ---
@@ -3239,7 +3189,7 @@ public readonly searchTerms: string[];
 
 - *Type:* string[]
 
-The terms in alarm descriptions to seach for to determine if alarms should be checked.
+The terms in alarm descriptions to search for to determine if alarms should be checked.
 
 If any of the alarms matching these search terms are in ALARM state, the stage transition will be closed.
 
@@ -4078,36 +4028,6 @@ The pipeline stage.
 
 ---
 
-### GetAlarmStateOptions <a name="GetAlarmStateOptions" id="@cdklabs/cdk-codepipeline-extensions.GetAlarmStateOptions"></a>
-
-searchTerms: a list of terms to match in the alarm description.
-
-#### Initializer <a name="Initializer" id="@cdklabs/cdk-codepipeline-extensions.GetAlarmStateOptions.Initializer"></a>
-
-```typescript
-import { GetAlarmStateOptions } from '@cdklabs/cdk-codepipeline-extensions'
-
-const getAlarmStateOptions: GetAlarmStateOptions = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.GetAlarmStateOptions.property.searchTerms">searchTerms</a></code> | <code>string[]</code> | *No description.* |
-
----
-
-##### `searchTerms`<sup>Required</sup> <a name="searchTerms" id="@cdklabs/cdk-codepipeline-extensions.GetAlarmStateOptions.property.searchTerms"></a>
-
-```typescript
-public readonly searchTerms: string[];
-```
-
-- *Type:* string[]
-
----
-
 ### LocalPathOptions <a name="LocalPathOptions" id="@cdklabs/cdk-codepipeline-extensions.LocalPathOptions"></a>
 
 Options for creating a calendar from a local file path.
@@ -4408,92 +4328,8 @@ The name of the calendar.
 ---
 
 
-## Protocols <a name="Protocols" id="Protocols"></a>
-
-### IAlarmDetail <a name="IAlarmDetail" id="@cdklabs/cdk-codepipeline-extensions.IAlarmDetail"></a>
-
-- *Implemented By:* <a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail">IAlarmDetail</a>
-
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.state">state</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.alarmArn">alarmArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.alarmDescription">alarmDescription</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.reason">reason</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `state`<sup>Required</sup> <a name="state" id="@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.state"></a>
-
-```typescript
-public readonly state: string;
-```
-
-- *Type:* string
-
----
-
-##### `alarmArn`<sup>Optional</sup> <a name="alarmArn" id="@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.alarmArn"></a>
-
-```typescript
-public readonly alarmArn: string;
-```
-
-- *Type:* string
-
----
-
-##### `alarmDescription`<sup>Optional</sup> <a name="alarmDescription" id="@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.alarmDescription"></a>
-
-```typescript
-public readonly alarmDescription: string;
-```
-
-- *Type:* string
-
----
-
-##### `reason`<sup>Required</sup> <a name="reason" id="@cdklabs/cdk-codepipeline-extensions.IAlarmDetail.property.reason"></a>
-
-```typescript
-public readonly reason: string;
-```
-
-- *Type:* string
-
----
 
 ## Enums <a name="Enums" id="Enums"></a>
-
-### AlarmState <a name="AlarmState" id="@cdklabs/cdk-codepipeline-extensions.AlarmState"></a>
-
-#### Members <a name="Members" id="Members"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.AlarmState.OK">OK</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.AlarmState.ALARM">ALARM</a></code> | *No description.* |
-| <code><a href="#@cdklabs/cdk-codepipeline-extensions.AlarmState.INSUFFICIENT_DATA">INSUFFICIENT_DATA</a></code> | *No description.* |
-
----
-
-##### `OK` <a name="OK" id="@cdklabs/cdk-codepipeline-extensions.AlarmState.OK"></a>
-
----
-
-
-##### `ALARM` <a name="ALARM" id="@cdklabs/cdk-codepipeline-extensions.AlarmState.ALARM"></a>
-
----
-
-
-##### `INSUFFICIENT_DATA` <a name="INSUFFICIENT_DATA" id="@cdklabs/cdk-codepipeline-extensions.AlarmState.INSUFFICIENT_DATA"></a>
-
----
-
 
 ### CalendarSourceType <a name="CalendarSourceType" id="@cdklabs/cdk-codepipeline-extensions.CalendarSourceType"></a>
 

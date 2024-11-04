@@ -1,14 +1,19 @@
-import { CodePipeline } from 'aws-sdk';
+import { CodePipeline } from '@aws-sdk/client-codepipeline';
+import type {
+  DisableStageTransitionInput,
+  EnableStageTransitionInput,
+  StageState,
+} from '@aws-sdk/client-codepipeline';
 
 const codepipeline = new CodePipeline();
 
 export const getStageState = async (
   pipelineName: string,
   stageName: string
-): Promise<CodePipeline.StageState | undefined> => {
-  const pipelineState = await codepipeline
-    .getPipelineState({ name: pipelineName })
-    .promise();
+): Promise<StageState | undefined> => {
+  const pipelineState = await codepipeline.getPipelineState({
+    name: pipelineName,
+  });
   return pipelineState.stageStates?.find(
     (stage) => stage.stageName === stageName
   );
@@ -19,9 +24,9 @@ export const getStageState = async (
  * Strips invalid characters from the reason and truncates to 300 characters.
  */
 export const disableStageTransition = async (
-  params: CodePipeline.Types.DisableStageTransitionInput,
+  params: DisableStageTransitionInput,
   lastChangedByMustInclude: string,
-  stageState?: CodePipeline.StageState
+  stageState?: StageState
 ) => {
   if (
     stageState?.inboundTransitionState?.enabled === true ||
@@ -32,9 +37,9 @@ export const disableStageTransition = async (
   ) {
     // See documentation https://docs.amazon.com/codepipeline/latest/APIReference/API_DisableStageTransition.html
     params.reason = params.reason
-      .replace(/[^a-zA-Z0-9!@ \(\)\.\*\?\-]/g, '-')
+      ?.replace(/[^a-zA-Z0-9!@ \(\)\.\*\?\-]/g, '-')
       .slice(0, 300);
-    await codepipeline.disableStageTransition(params).promise();
+    await codepipeline.disableStageTransition(params);
   }
 };
 
@@ -43,9 +48,9 @@ export const disableStageTransition = async (
  * and if lastChangedBy includes the lastChangedByMustInclude string.
  */
 export const enableStageTransition = async (
-  params: CodePipeline.Types.EnableStageTransitionInput,
+  params: EnableStageTransitionInput,
   lastChangedByMustInclude: string,
-  stageState?: CodePipeline.StageState
+  stageState?: StageState
 ) => {
   if (
     stageState?.inboundTransitionState?.enabled === false &&
@@ -53,6 +58,6 @@ export const enableStageTransition = async (
       lastChangedByMustInclude
     )
   ) {
-    await codepipeline.enableStageTransition(params).promise();
+    await codepipeline.enableStageTransition(params);
   }
 };

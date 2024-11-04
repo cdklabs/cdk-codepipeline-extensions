@@ -1,9 +1,12 @@
-import {
+import type {
   OnEventRequest,
   OnEventResponse,
 } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types'; // eslint-disable-line import/no-unresolved
 import { SQSEvent } from 'aws-lambda';
-import { AlarmState, getAggregateAlarmState } from '../common/alarm-state';
+import {
+  AlarmState,
+  getAggregateAlarmState,
+} from '../shared.lambda/alarm-state';
 
 export interface EventRequest extends OnEventRequest, SQSEvent {
   readonly endTime?: number;
