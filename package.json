@@ -55,7 +55,7 @@
     "@aws-cdk/integ-tests-alpha": "latest",
     "@aws-sdk/client-cloudwatch": "^3.731.1",
     "@aws-sdk/client-codepipeline": "^3.731.1",
-    "@aws-sdk/client-s3": "^3.731.1",
+    "@aws-sdk/client-s3": "^3.732.0",
     "@aws-sdk/client-ssm": "^3.731.1",
     "@aws-sdk/credential-providers": "^3.731.1",
     "@types/aws-lambda": "^8.10.147",
