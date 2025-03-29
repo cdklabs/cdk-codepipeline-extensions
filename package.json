@@ -57,7 +57,7 @@
     "@aws-sdk/client-codepipeline": "^3.777.0",
     "@aws-sdk/client-s3": "^3.777.0",
     "@aws-sdk/client-ssm": "^3.777.0",
-    "@aws-sdk/credential-providers": "^3.777.0",
+    "@aws-sdk/credential-providers": "^3.778.0",
     "@types/aws-lambda": "^8.10.148",
     "@types/jest": "^29",
     "@types/node": "^18",
