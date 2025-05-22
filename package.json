@@ -53,9 +53,9 @@
   "devDependencies": {
     "@aws-cdk/integ-runner": "latest",
     "@aws-cdk/integ-tests-alpha": "latest",
-    "@aws-sdk/client-cloudwatch": "^3.812.0",
+    "@aws-sdk/client-cloudwatch": "^3.815.0",
     "@aws-sdk/client-codepipeline": "^3.812.0",
-    "@aws-sdk/client-s3": "^3.812.0",
+    "@aws-sdk/client-s3": "^3.815.0",
     "@aws-sdk/client-ssm": "^3.812.0",
     "@aws-sdk/credential-providers": "^3.812.0",
     "@types/aws-lambda": "^8.10.149",
