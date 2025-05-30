@@ -50,7 +50,7 @@ const project = new CdklabsConstructLibrary({
     javaPackage: 'io.github.cdklabs.cdk.codepipeline.extensions',
     mavenGroupId: 'io.github.cdklabs',
     mavenArtifactId: 'cdk-codepipeline-extensions',
-    mavenEndpoint: 'https://s01.oss.sonatype.org',
+    mavenServerId: 'central-ossrh',
   },
   publishToNuget: {
     dotNetNamespace: 'Cdklabs.CdkCodePipelineExtensions',
