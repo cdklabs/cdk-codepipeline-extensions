@@ -21,8 +21,9 @@ export const getCalendarState = async (
     const result = await ssm.getCalendarState({
       CalendarNames: [calendarName],
     });
-    if (!result.State)
+    if (!result.State) {
       throw new Error('getCalendarState returned an undefined state.');
+    }
     return {
       state: result.State,
       nextTransitionTime:
