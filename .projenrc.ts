@@ -13,7 +13,9 @@ const project = new CdklabsConstructLibrary({
   enablePRAutoMerge: true,
 
   // Deps
-  cdkVersion: '2.128.0', // needed for Pipeline.pipelineType
+  // 2.239.0 is the first aws-cdk-lib (and aws-cdk-go) built against constructs 10.5, which
+  // adds IConstruct#with(). Older aws-cdk-go breaks with an ambiguous With selector.
+  cdkVersion: '2.239.0',
   jsiiVersion: '5.5.x',
   typescriptVersion: '5.5.x',
   deps: [],
