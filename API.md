@@ -47,6 +47,7 @@ new CalendarSetupFunction(scope: Construct, id: string, props?: CalendarSetupFun
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addEventSource">addEventSource</a></code> | Adds an event source to this function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.addEventSourceMapping">addEventSourceMapping</a></code> | Adds an event source that maps to this AWS Lambda function. |
@@ -77,6 +78,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.applyRemovalPolicy"></a>
 
@@ -1140,6 +1162,7 @@ new ChangeController(scope: Construct, id: string, props: ChangeControllerProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeController.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeController.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1150,6 +1173,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@cdklabs/cdk-codepipeline-extensions.ChangeController.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@cdklabs/cdk-codepipeline-extensions.ChangeController.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1257,6 +1301,7 @@ new ChangeControllerFunction(scope: Construct, id: string, props?: ChangeControl
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addEventSource">addEventSource</a></code> | Adds an event source to this function. |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.addEventSourceMapping">addEventSourceMapping</a></code> | Adds an event source that maps to this AWS Lambda function. |
@@ -1287,6 +1332,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction.applyRemovalPolicy"></a>
 
@@ -2345,6 +2411,7 @@ new PipelineWithChangeControl(scope: Construct, id: string, props: PipelineWithC
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -2355,6 +2422,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
