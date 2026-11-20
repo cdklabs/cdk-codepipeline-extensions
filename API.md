@@ -4,6 +4,8 @@
 
 ### CalendarSetupFunction <a name="CalendarSetupFunction" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable, aws-cdk-lib.IResource, aws-cdk-lib.aws_lambda.IFunction, aws-cdk-lib.aws_ec2.IConnectable, aws-cdk-lib.aws_iam.IGrantable, aws-cdk-lib.aws_ec2.IClientVpnConnectionHandler
+
 An AWS Lambda function which executes src/time-windows/calendar/calendar-setup.
 
 #### Initializers <a name="Initializers" id="@cdklabs/cdk-codepipeline-extensions.CalendarSetupFunction.Initializer"></a>
@@ -1090,6 +1092,8 @@ The timeout configured for this lambda.
 
 ### ChangeController <a name="ChangeController" id="@cdklabs/cdk-codepipeline-extensions.ChangeController"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable
+
 A change controller.
 
 When added to a stage in a pipeline, this will check against
@@ -1209,6 +1213,8 @@ The tree node.
 
 
 ### ChangeControllerFunction <a name="ChangeControllerFunction" id="@cdklabs/cdk-codepipeline-extensions.ChangeControllerFunction"></a>
+
+- *Implements:* constructs.IConstruct, constructs.IDependable, aws-cdk-lib.IResource, aws-cdk-lib.aws_lambda.IFunction, aws-cdk-lib.aws_ec2.IConnectable, aws-cdk-lib.aws_iam.IGrantable, aws-cdk-lib.aws_ec2.IClientVpnConnectionHandler
 
 An AWS Lambda function which executes src/time-windows/change-controller/change-controller.
 
@@ -2295,6 +2301,8 @@ The timeout configured for this lambda.
 
 
 ### PipelineWithChangeControl <a name="PipelineWithChangeControl" id="@cdklabs/cdk-codepipeline-extensions.PipelineWithChangeControl"></a>
+
+- *Implements:* constructs.IConstruct, constructs.IDependable
 
 A pipeline with a change controller.
 
