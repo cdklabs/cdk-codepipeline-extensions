@@ -16,8 +16,8 @@ const project = new CdklabsConstructLibrary({
   // 2.239.0 is the first aws-cdk-lib (and aws-cdk-go) built against constructs 10.5, which
   // adds IConstruct#with(). Older aws-cdk-go breaks with an ambiguous With selector.
   cdkVersion: '2.239.0',
-  jsiiVersion: '5.5.x',
-  typescriptVersion: '5.5.x',
+  jsiiVersion: '5.9.x',
+  typescriptVersion: '5.9.x',
   deps: [],
   devDeps: [
     '@types/aws-lambda',
@@ -26,7 +26,7 @@ const project = new CdklabsConstructLibrary({
     '@aws-sdk/client-s3',
     '@aws-sdk/client-ssm',
     '@aws-sdk/credential-providers',
-    'jsii-rosetta@5.5.x',
+    'jsii-rosetta@5.9.x',
   ],
   prettier: true,
 
