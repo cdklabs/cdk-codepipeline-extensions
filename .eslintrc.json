@@ -13,7 +13,12 @@
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "./tsconfig.dev.json"
+    "projectService": {
+      "allowDefaultProject": [
+        ".projenrc.ts"
+      ],
+      "defaultProject": "./tsconfig.json"
+    }
   },
   "extends": [
     "plugin:import/typescript",
@@ -29,7 +34,7 @@
     "import/resolver": {
       "node": {},
       "typescript": {
-        "project": "./tsconfig.dev.json",
+        "project": "./tsconfig.json",
         "alwaysTryTypes": true
       }
     }
@@ -40,6 +45,9 @@
     "node_modules/",
     "*.generated.ts",
     "coverage",
+    "src/autorollback/autorollback-function.ts",
+    "src/time-windows/calendar/calendar-setup-function.ts",
+    "src/time-windows/change-controller/change-controller-function.ts",
     "!.projenrc.ts",
     "!projenrc/**/*.ts"
   ],
