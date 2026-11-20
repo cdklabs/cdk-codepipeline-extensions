@@ -1,11 +1,11 @@
 import { S3 } from '@aws-sdk/client-s3';
 import { SSM } from '@aws-sdk/client-ssm';
 import { fromTemporaryCredentials } from '@aws-sdk/credential-providers';
-import type {
+import { CalendarSourceType } from './types';
+import {
   OnEventRequest,
   OnEventResponse,
-} from 'aws-cdk-lib/custom-resources/lib/provider-framework/types'; // eslint-disable-line import/no-unresolved
-import { CalendarSourceType } from './types';
+} from '../../shared.lambda/custom-resource-types';
 
 export const handler = async (
   event: OnEventRequest
